@@ -13,13 +13,13 @@ The perceptron never took off in popularity because Marvin Minsky and Seymour Pa
 \begin{figure}[ht]
 \includegraphics[width=10.5cm, height=5.5cm]{images/Rosenblattperceptron.png}
 \centering
-\caption{Rosenblatt Perceptron}
+\caption{Rosenblatt Perceptron \protect\cite{markovbook}}
 \label{fig:perceptron}
 \end{figure}
 
-LeCun et al., published a method to recognized hand-written digits and it was utilized bythe U.S. Postal Service \cite{LeCunBoserDenkerEtAl89}, making it the first neural network model that received widesread adoption . This is a huge milestone for deep learning, proving the usefulness of convolution operations and weight learning the features in computer vision.
+LeCun et al., published a method to recognized hand-written digits and it was utilized by the U.S. Postal Service \cite{LeCunBoserDenkerEtAl89}, making it the first neural network model that received widesread adoption . This is a huge milestone for deep learning, proving the usefulness of convolution operations and weight learning the features in computer vision.
 
-However, there are still a lot of flaws with neural networks. Take for example backpropagation, the weight learning algorithm in neural networks, has a number of issues such as vanishing gradients, exploding gradients, and the inability to learn long-term information. Hochreiter and Schmidhuber showed how  Long short-term memory (LSTM) architecture could overcome shortcomings of backpropagation over time.
+However, there are still a lot of flaws with neural networks. Take for example the backpropagation algorithm, has a number of issues such as vanishing gradients, exploding gradients, and the inability to learn long-term information. Hochreiter and Schmidhuber showed how  Long short-term memory (LSTM) architecture could overcome shortcomings of backpropagation over time.
 
 LeCun et al. also showed the advantages of deep learning through more complex neural networks architectures such as convolutional neural networks (CNNs), restricted Boltzmann machines (RBMs), and deep belief networks (DBNs). They also showed the importance of techniques such as unsupervised pre-training
 with fine-tuning, thus inspiring the next wave of deep learning. Li et al.,  launched ImageNet, which was the most extensive collection of labelled images and highlighted the importance of robust dataset to train a deep learning model for computer vision task. 
@@ -34,11 +34,11 @@ In 2017, Transformers were formally introduced in the "Attention is All You Need
 This section would  lays out the various building blocks of transformers such as attention, multi-head attention, positional encodings, residual connections, and encoder-decoder architecture. Subsections \ref{subsection: encoder-decoder} and \ref{subsection: sequence} would give a brief introduction to Recurrent Neural Networks (RNN) and sequence-to-sequence model (seq2seq) and the subsequent subsections would explain why attention unit and Transformers are born from RNN and seq2seq. 
 \subsection{Encoder-Decoder Architecture} \label{subsection: encoder-decoder}
 
-Because Transformers has its origin in NLP that relies on sequential input, the use of encoder-decoder architecture as shown in \ref{fig:encoder-decoder} such as RNN is very common. The encoder module takes a variable-length sequence and converts it into a fixed-length output-state while the decoder module takes a fixed-length state and converts it back into a variable-length output.
+Because Transformers has its origin in NLP that relies on sequential input, the use of encoder-decoder architecture as shown in \ref{fig:encoder-decoder} such as RNN is very common. The encoder module takes a variable-length sequence and converts it into a fixed-length output-state while the decoder module takes a fixed-length state and converts it back into a variable-length output \cite{attention}.
 \begin{figure}[ht]
 \includegraphics[width=13.5cm, height=5.5cm]{images/encodeer-decoder.jpg}
 \centering
-\caption{Encoder-Decoder Architecture}
+\caption{Encoder-Decoder Architecture \protect\protect\cite{attention}}
 \label{fig:encoder-decoder}
 \end{figure}
 
@@ -57,7 +57,7 @@ steps makes it very difficult to parallelize.
 
 \subsection{Attention Mechanism}
 
-Attention mechanism was first introduced by \cite{attention} and it is the most fundamental part of a Transformer. The attention unit will take input vectors $\mathbf{x}_1...\mathbf{x}_t$ to produce output vectors $\mathbf{y}_1...\mathbf{y}_t$. $\mathbf{y}_i$ is the weighted average of all the input vectors
+Attention mechanism was first introduced by \cite{attention} and it is the most fundamental part of a Transformer which was introduced by Google in 2017 \cite{attention-is-all-you-need}. The attention unit will take input vectors $\mathbf{x}_1...\mathbf{x}_t$ to produce output vectors $\mathbf{y}_1...\mathbf{y}_t$. $\mathbf{y}_i$ is the weighted average of all the input vectors
 \begin{equation}
     \mathbf{y}_i = \sum w_{ij}\mathbf{x}_j
 \end{equation}
@@ -97,7 +97,7 @@ The attention mechanism is shown in figure \ref{fig:attention-unit}
 \begin{figure}[ht]
 \includegraphics[width=4.0cm, height=6.5cm]{images/attention unit.png}
 \centering
-\caption{Attention Mechanism Unit}
+\caption{Illustration of Attention Mechanism Unit \protect\cite{attention-is-all-you-need}}
 \label{fig:attention-unit}
 \end{figure}
 \FloatBarrier
@@ -110,7 +110,7 @@ With the introduction of the softmax function in the previous section, we limit 
 \begin{figure}[ht]
 \includegraphics[width=5.5cm, height=7.5cm]{images/multi-head attention.png}
 \centering
-\caption{Multi-head Attention}
+\caption{Illustration of Multi-head Attention \protect\cite{attention-is-all-you-need}}
 \label{fig:multi-head}
 \end{figure}
 \FloatBarrier
@@ -120,7 +120,7 @@ Multi-attention head can be thought of as multiple copies of the self-attention 
 \begin{figure}[ht]
 \includegraphics[width=6.5cm, height=9.5cm]{images/transformer_architecture.png}
 \centering
-\caption{Transformer Architecture}
+\caption{Illustration of Transformer Architecture \protect\cite{attention-is-all-you-need}}
 \label{fig:transformer-architecture}
 \end{figure}
 \FloatBarrier

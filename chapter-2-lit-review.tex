@@ -205,13 +205,13 @@ Assuming that the data is linearly separable, SVM is a task of solving the optim
 
 \vspace{0.1cm}
 
-\noindent $w$ is the linear combination of the training data $x$:
+Where $w$ is the weight, $x$ the input vector, $y$ is the output vector and $b$ is the bias:
 
 \begin{equation}
     w = \sum_{i=1}^m \alpha_i y_i x_i
 \end{equation}
 
-\noindent Where $\alpha$ is the Lagrange multiplier. Not every dataset is linearly separable thus this problem can be solved by transforming the feature vectors $x$ into a higher dimension using a non-linear mapping $/psi$. Thus instead of learning using $x$, we may learn using a higher-dimensional features $\psi(x)$, this method is called the \textit{kernel trick}. Specifically, given a feature mapping $\psi$, we define the corresponding kernel to be:    
+Where $\alpha$ is the Lagrange multiplier. Not every dataset is linearly separable thus this problem can be solved by transforming the feature vectors $x$ into a higher dimension using a non-linear mapping $/psi$. Thus instead of learning using $x$, we may learn using a higher-dimensional features $\psi(x)$, this method is called the \textit{kernel trick}. Specifically, given a feature mapping $\psi$, we define the corresponding kernel to be:    
 
 \begin{equation}
     K(x,z)=\psi(x)^T\psi(z)
@@ -225,7 +225,7 @@ The SVM described above can only distinguish between binary classes.The one-vs-a
     P(x,y) = \frac{1}{Z} e^{-E(x,y)
 \end{equation}
 
-\noindent where $Z = \sum_{x,y}e^{-E(x,y)}$ and it is called the partition function whereas E is called the energy function. A commonly used energy function is $E(x,y) = \sum_{c\in C}\psi_{c}(x,y)$, where $\psi$ is called the clique potential \cite{DBLP:journals/corr/Thoma16a}. A thorough presentation of MRF can be found in \cite{markovbook}. 
+\noindent where $Z = \sum_{x,y}e^{-E(x,y)}$ and it is called the partition function and E is the energy function. A commonly used energy function is $E(x,y) = \sum_{c\in C}\psi_{c}(x,y)$, where $\psi$ is called the clique potential \cite{DBLP:journals/corr/Thoma16a}. A thorough presentation of MRF can be found in \cite{markovbook}. 
 
 \subsection{Conditional Random Field (CRF) for Semantic Segmentation} CRF is an extension of MRF. Instead of learning the distribution $P(x,y)$, it chooses to learn $P(x|y)$ \cite{DBLP:journals/corr/Thoma16a}. There are two advantages that CRF has over MRF. The first one being it does not to estimate the distribution of x. The second advantage is the consequence of the first one, as the distribution of x is not being estimated, less computation is required hence making CRF faster than MRF \cite{YU201882}. CRF has the partition function $Z(x)$:
 \begin{equation}
@@ -309,7 +309,7 @@ The first version of Swin Transformer \cite{swin-v1} presents a hierarchical fea
 \begin{figure}[ht]
 \includegraphics[width=9.5cm, height=5.5cm]{images/swin vs vit.png}
 \centering
-\caption{The difference between Swin Transformer and ViT sampai sini}
+\caption{The difference between Swin Transformer and ViT \protect\cite{swin-v1}}
 \label{fig:swin-vs-vit}
 \end{figure}
 
@@ -321,7 +321,7 @@ In stage 2, the patch merging layer concatenates the features of each group of 2
 \begin{figure}[ht]
 \includegraphics[width=11.5cm, height=4.5cm]{images/swin-transformer-4block.png}
 \centering
-\caption{Swin Transformer V1 Architecture}
+\caption{Swin Transformer V1 Architecture \protect\cite{swin-v1}}
 \label{fig:swin architecture1}
 \end{figure}
 
@@ -340,14 +340,14 @@ The main issue with this approach is the number of local windows increased from 
 \begin{figure}[ht]
 \includegraphics[width=10.5cm, height=4.5cm]{images/swin-msa1.jpeg}
 \centering
-\caption{Shifted Window Multi-head Self-Attention}
+\caption{Shifted Window Multi-head Self-Attention \protect\cite{swin-v1}}
 \label{fig:swin shifted}
 \end{figure}
 
 \begin{figure}[ht]
 \includegraphics[width=13.5cm, height=5.5cm]{images/swin-cyclic-shift.jpg}
 \centering
-\caption{Cyclic Shifted Windows in Swin Transformer}
+\caption{Cyclic Shifted Windows in Swin Transformer \protect\cite{swin-v1}}
 \label{fig:swin cyclic}
 \end{figure}
 
@@ -356,7 +356,7 @@ SW-MSA successfully introduced connections between windows while masking prevent
 \begin{figure}[ht]
 \includegraphics[width=6.5cm, height=7cm]{images/swin-architecture.jpg}
 \centering
-\caption{Two Successive Swin Transformer Blocks}
+\caption{Two Successive Swin Transformer Blocks \protect\cite{swin-v1}}
 \label{fig:2swins}
 \end{figure}
 
@@ -375,7 +375,7 @@ Where $B_{ij}$ is the relative position bias between pixel i and j; $\tau$ is a 
 \begin{figure}[ht]
 \includegraphics[width=13.5cm, height=9.5cm]{images/swin1-vs-swin2.jpg}
 \centering
-\caption{Difference Between Swin V1 and Swin V2}
+\caption{Difference Between Swin V1 and Swin V2 \protect\cite{swin-v2}}
 \label{fig:swin v1 vs v2}
 \end{figure}
 \FloatBarrier
@@ -390,13 +390,13 @@ ResNet18 consists of four stages and each stage will down-sample the feature map
 \begin{figure}[ht]
 \includegraphics[width=10.5cm, height=7cm]{images/unetformer.jpg}
 \centering
-\caption{UNetFormer Architecture}
+\caption{UNetFormer Architecture \protect\cite{unetformer}}
 \label{fig:unetformer}
 \end{figure}
 \begin{figure}[ht]
 \includegraphics[width=10.5cm, height=7cm]{images/gltb.jpg}
 \centering
-\caption{ Illustration of (a) the standard Transformer block and (b) the Transformer block with GLTB}
+\caption{ Illustration of (a) the standard Transformer block and (b) the Transformer block with GLTB \protect\cite{unetformer}}
 \label{fig:gltb}
 \end{figure}
 
@@ -405,7 +405,7 @@ The GLTB is made up of the global–local attention, multilayer perceptron, two 
 \begin{figure}[ht]
 \includegraphics[width=13.5cm, height=18cm]{images/unetformer besar.jpg}
 \centering
-\caption{Cross-shaped Window Context Interaction in UNetFormer}
+\caption{Cross-shaped Window Context Interaction in UNetFormer \protect\cite{unetformer}}
 \label{fig:unetformer-besar}
 \end{figure}
 \FloatBarrier
@@ -430,7 +430,7 @@ Where w is the window size and D denotes the self-attention computation. Similar
 \begin{figure}[ht]
 \includegraphics[width=10.5cm, height=7cm]{images/frh.jpg}
 \centering
-\caption{Feature refinement Head of UNetFormer}
+\caption{Feature refinement Head of UNetFormer \protect\cite{unetformer}}
 \label{fig:frh}
 \end{figure}
 
@@ -446,7 +446,7 @@ Local Attention Network (LANet) \cite{lanet}introduced two additional modules to
 \begin{figure}[ht]
 \includegraphics[width=12.5cm, height=9.5cm]{images/lanet.png}
 \centering
-\caption{LANet Architecture}
+\caption{LANet Architecture \protect\cite{lanet}}
 \label{fig:lanet}
 \end{figure}
 
@@ -462,7 +462,7 @@ where $h_p$ and $w_p$ is the horizontal and vertical size of the patch and $x_c$
 \begin{figure}[ht]
 \includegraphics[width=9.5cm, height=4.5cm]{images/pam.png}
 \centering
-\caption{Patch Attention Module in LANet}
+\caption{Patch Attention Module in LANet \protect\cite{lanet}}
 \label{fig:pam}
 \end{figure}
 \FloatBarrier
@@ -471,7 +471,7 @@ In most networks, the most frequently used way of employing low-level features i
 \begin{figure}[ht]
 \includegraphics[width=9.5cm, height=4.5cm]{images/aem.png}
 \centering
-\caption{Attention Embedding Module in LANet}
+\caption{Attention Embedding Module in LANet \protect\cite{lanet}}
 \label{fig:aem}
 \end{figure}
 \FloatBarrier
@@ -485,7 +485,7 @@ A novel semantic segmentation scheme of densely connected (DC-Swin) \cite{a-nove
 \begin{figure}[ht]
 \includegraphics[width=12.5cm, height=6.5cm]{images/dc-swin.png}
 \centering
-\caption{(a) Overall architecture of DC-Swin. (b) Pair of Swin Transformer blocks. (c) Downsample Connection. (d) Large Field Upsample Connection. (e) SSA. (f) SCA}
+\caption{(a) Overall architecture of DC-Swin. (b) Pair of Swin Transformer blocks. (c) Downsample Connection. (d) Large Field Upsample Connection. (e) SSA. (f) SCA \protect\cite{a-novel-transformer}}
 \label{fig:dc}
 \end{figure}
 
@@ -549,7 +549,7 @@ The architecture of Bilateral Awareness Network (BANet) is shown in figure \ref{
 \begin{figure}[ht]
 \includegraphics[width=12.5cm, height=6.5cm]{images/banet.jpg}
 \centering
-\caption{Architecture of Bilateral Awareness Network (BANet)}
+\caption{Architecture of Bilateral Awareness Network (BANet) \protect\cite{banet}}
 \label{fig:banet}
 \end{figure}
 
@@ -559,7 +559,7 @@ The dependency path is made up of a stem block and four Transformer stages to ex
 \begin{figure}[ht]
 \includegraphics[width=4.5cm, height=7.5cm]{images/etb.png}
 \centering
-\caption{Efficient Transformer Block}
+\caption{Efficient Transformer Block \protect\cite{banet}}
 \label{fig:etb}
 \end{figure}
 
@@ -586,7 +586,7 @@ The last module in BANet is the Feature Aggregation Module (FAM) and it is desig
 \begin{figure}[ht]
 \includegraphics[width=7.5cm, height=5.5cm]{images/fam.jpg}
 \centering
-\caption{Feature Aggregation Module}
+\caption{Feature Aggregation Module \protect\cite{banet}}
 \label{fig:fam}
 \end{figure}
 
@@ -598,7 +598,7 @@ Adaptive Enhanced Swin Transformer with U-Net (AESwin-UNet) \cite{unet-transform
 \begin{figure}[ht]
 \includegraphics[width=12.5cm, height=8.5cm]{images/unet-trasnformer.jpg}
 \centering
-\caption{Architecture of Adaptive Enhanced Swin Transformer with U-Net (AESwin-UNet)}
+\caption{Architecture of Adaptive Enhanced Swin Transformer with U-Net (AESwin-UNet) \protect\cite{unet-transformer}}
 \label{fig:unetswin}
 \end{figure}
 
