@@ -38,7 +38,7 @@ Because Transformers has its origin in NLP that relies on sequential input, the 
 \begin{figure}[ht]
 \includegraphics[width=13.5cm, height=5.5cm]{images/encodeer-decoder.jpg}
 \centering
-\caption{Encoder-Decoder Architecture \protect\protect\cite{attention}}
+\caption{Encoder-Decoder Architecture \protect\cite{attention}}
 \label{fig:encoder-decoder}
 \end{figure}
 
@@ -115,7 +115,7 @@ With the introduction of the softmax function in the previous section, we limit 
 \end{figure}
 \FloatBarrier
 
-Multi-attention head can be thought of as multiple copies of the self-attention mechanism running in parallel, each with their own key, value and query values. However, generating $\mathbf{K}$, $/mathbf{Q}$ and $\mathbf{V}$ for each head would be computationally expensive. We can avoid this problem by rescaling the weight matrix by dividing it with the square root of the number of heads and concatenating the $\mathbf{K}$, $/mathbf{Q}$ and $\mathbf{V}$ matrix as shown in \ref{attention-is-all-you-need}. The entire Transformer architecture with multi-head attention head is shown in figure \ref{fig:transformer-architecture}
+Multi-attention head can be thought of as multiple copies of the self-attention mechanism running in parallel, each with their own key, value and query values. However, generating $\mathbf{K}$, $\mathbf{Q}$ and $\mathbf{V}$ for each head would be computationally expensive. We can avoid this problem by rescaling the weight matrix by dividing it with the square root of the number of heads and concatenating the $\mathbf{K}$, $\mathbf{Q}$ and $\mathbf{V}$ matrix as shown in \ref{attention-is-all-you-need}. The entire Transformer architecture with multi-head attention head is shown in figure \ref{fig:transformer-architecture}
 
 \begin{figure}[ht]
 \includegraphics[width=6.5cm, height=9.5cm]{images/transformer_architecture.png}
