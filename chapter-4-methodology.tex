@@ -123,8 +123,7 @@ As shown in figure \ref{fig:data-uti}, the dataset is split into urban and rural
 \end{figure}
 \FloatBarrier
 
-
-
+Before training starts, the training images and mask would undergo several transformaation. First, they would be cropped into smaller images of 512x512 pixels as required by UNetFormer. Then, those images would be randomly flipped, horizontally and vertically before randomly increasing its brightness.
 
 
 
@@ -158,7 +157,8 @@ The model is trained on a computer with Nvidia GTX 1080 GPU. The semantic segmen
 \label{fig:initial-model}
 \end{figure}
 
-Based on Figure \ref{fig:initial-model}, the training image are augmented as described in the previousection. Then, both the training images and masks would be cropped to reduce its size. All the components inside the red line belongs to UNetFormer. Patch embedding would be applied to the cropped images before it is fed into the encoder that is made up of four Swin Transformer. The encoder is connected to the decoder through a series of skip connections. The output from the decoder will be used to calculate the losses and to update the weights. This process is repeated as many times as the desired epoch value. Lastly, after it finishes all epoch, the output will be a collection of cropped black and white images. The cropped images will be merged to its original dimension. The mask produced will have a pixel values of 0-7 and this makes it impossible to assess its quality through visual inspection. We converted the 0-7 values to RGB values to make it eassier to assess. 
+Based on Figure \ref{fig:initial-model}, the training image are augmented as described in the previous section. Then, both the training images and masks would be cropped to reduce its size. All the components inside the red line belongs to UNetFormer. Patch embedding would be applied to the cropped images before it is fed into the encoder that is made up of four Swin Transformer. The encoder is connected to the decoder through a series of skip connections. The output from the decoder will be used to calculate the losses and to update the weights. This process is repeated as many times as the desired epoch value. Lastly, after it finishes all epoch, the output will be a collection of cropped black and white images. The mask produced will have a pixel values of 0-7 and this makes it impossible to assess its quality through visual inspection. We converted the 0-7 values to RGB values to make it eassier to assess. 
+
 \section{Model Evaluation}
 
 The most common evaluation metric used by semantic segmentation is the mean Intersection over Union (mIou). The mIoU is also known as the Jaccard Index or the Jaccard similarity coefficeint. The IoU for a single class is defined as:
@@ -184,8 +184,7 @@ Accuracy is the ratio of correct predictions and can be calculated as:
      F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}
  \end{equation}
 
- We used all five of the evaluation metrics to evaluate our model.
-
-
+ We plan to use all five of the evaluation metrics to evaluate our model.
 
 \section{Model Refinement}
+
