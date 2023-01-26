@@ -44,7 +44,9 @@ Each pixel in the dataset is labelled as it is made specifically for sematic seg
 \label{fig:loveda-structure}
 \end{figure}
 
-Figure \ref{fig:boxplot-rural-train}, \ref{fig:boxplot-urban-train}, \ref{fig:boxplot-rural-test}and \ref{fig:boxplot-rural-test} show the boxplots of the classes in the training and test set. We observe that 
+Figure \ref{fig:boxplot-rural-train}, \ref{fig:boxplot-urban-train}, \ref{fig:boxplot-rural-test} and \ref{fig:boxplot-urban-test} show the boxplots of the classes in the training and test set while figure \ref{fig:barplot-rural-train}, \ref{fig:barplot-urban-train}, \ref{fig:barplot-rural-test} and \ref{fig:barplot-urban-test} show the distribution of the same datasets. We observed that there is definitely class imbalanced in all four sets of the data. Rural areas have more agriculture and forest as expected. Urban area have more roads and buildings as the buildings in urban area are bigger and situated closely together while the roads in urban area are generally wider than the ones in rural area. Water are often exist in the form of large-scale rivers, drains or lakes in the urban scenes, while small ponds and ditches are more common in the rural scenes. In urban area, the agricultural part is often found in the gaps between the buildings while the rural area have a more continuous and large agricultural lands.
+
+There are two concerning observations from the graphs. The first one being the amount of agriculture in the urban test dataset is larger than expected. the second concern being both rural and urban areas have a very large amount of background area and the background have very different meaning in these two areas. The background in urban area are usually the sidewalks, parking lots and parks while the background in rural area are usually the unused gaps between agricultural area. 
 
 \FloatBarrier
 \begin{figure}[!h]
@@ -55,6 +57,13 @@ Figure \ref{fig:boxplot-rural-train}, \ref{fig:boxplot-urban-train}, \ref{fig:bo
 \end{figure}
 
 \begin{figure}[!h]
+\includegraphics[width=15.0cm, height=8.5cm]{images/rural train barplot.png}
+\centering
+\caption{Barplot of the Pixel Counts of the Rural Train Dataset}
+\label{fig:barplot-rural-train}
+\end{figure}
+
+\begin{figure}[!h]
 \includegraphics[width=15.0cm, height=8.5cm]{images/urban train boxplot.png}
 \centering
 \caption{Boxplot of the Pixel Counts of the Urban Train Dataset}
@@ -62,18 +71,42 @@ Figure \ref{fig:boxplot-rural-train}, \ref{fig:boxplot-urban-train}, \ref{fig:bo
 \end{figure}
 
 \begin{figure}[!h]
-\includegraphics[width=15.0cm, height=8.5cm]{images/rural test boxplot.png}
+\includegraphics[width=15.0cm, height=8.5cm]{images/urban train barplot.png}
 \centering
-\caption{Boxplot of the Pixel Counts of the Rural Test Dataset}
-\label{fig:boxplot-rural-train}
+\caption{Barplot of the Pixel Counts of the Rural Train Dataset}
+\label{fig:barplot-urban-train}
 \end{figure}
+
 
 \begin{figure}[!h]
 \includegraphics[width=15.0cm, height=8.5cm]{images/rural test boxplot.png}
 \centering
-\caption{Boxplot of the Pixel Counts of the Urban Test Dataset}
-\label{fig:boxplot-urban-train}
+\caption{Boxplot of the Pixel Counts of the Rural Test Dataset}
+\label{fig:boxplot-rural-test}
 \end{figure}
+
+\begin{figure}[!h]
+\includegraphics[width=15.0cm, height=8.5cm]{images/rural test barplot.png}
+\centering
+\caption{Barplot of the Pixel Counts of the Rural Test Dataset}
+\label{fig:barplot-rural-test}
+\end{figure}
+
+
+\begin{figure}[!h]
+\includegraphics[width=15.0cm, height=8.5cm]{images/urban test boxplot.png}
+\centering
+\caption{Boxplot of the Pixel Counts of the Urban Test Dataset}
+\label{fig:boxplot-urban-test}
+\end{figure}
+
+\begin{figure}[!h]
+\includegraphics[width=15.0cm, height=8.5cm]{images/urban test barplot.png}
+\centering
+\caption{Barplot of the Pixel Counts of the Urban Test Dataset}
+\label{fig:barplot-urban-test}
+\end{figure}
+
 \FloatBarrier
 
 
