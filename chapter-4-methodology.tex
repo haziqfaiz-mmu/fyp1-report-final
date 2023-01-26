@@ -112,6 +112,16 @@ There are two concerning observations from the graphs. The first one being the a
 
 \section{Data Preprocessing}
 
+As shown in figure \ref{fig:data-uti}, the dataset is split into urban and rural area. Those two categories are further split into training, testing and validation dataset. The mask are only avaialble for the training and validation set. When the actual training is being done, we combined the training and validation set into one folder as shown in figure \ref{fig:loveda-structure}. The model will be trained using both training sets.
+
+\FloatBarrier
+\begin{figure}[!h]
+\includegraphics[width=10.0cm, height=6.5cm]{images/loveda-chart.png}
+\centering
+\caption{Diagram of Data Utilization}
+\label{fig:data-uti}
+\end{figure}
+\FloatBarrier
 
 
 
@@ -120,6 +130,62 @@ There are two concerning observations from the graphs. The first one being the a
 
 \section{Model Design and Implementation}
 
+The initial model will be written using PyTorch, a deep learning library written in Python. Table \ref{tab:libraries} shows the list of important libraries used to build and test the model. This model would give us a baseline performance and gives us insight on how to proceed for this project.
+
+\begin{table}[]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Library}} & \textit{\textbf{Version}} \\ \hline
+\textit{\textbf{Pytorch}}              & 1.10                      \\ \hline
+\textit{\textbf{Torchvision}}          & 0.11.0                    \\ \hline
+\textit{\textbf{Cudatoolkit}}          & 11.3                      \\ \hline
+\textit{\textbf{Timm}}                 & -                         \\ \hline
+\textit{\textbf{Catalyst}}             & 20.09                     \\ \hline
+\textit{\textbf{Albumentations}}       & 1.1.0                     \\ \hline
+\textit{\textbf{Numpy}}                & -                         \\ \hline
+\textit{\textbf{Opencv-python}}       & -                         \\ \hline
+\end{tabular}
+\caption{List of Important Libraries Used}
+\label{tab:libraries}
+\end{table}
+
+The model is trained on a computer with Nvidia GTX 1080 GPU. The semantic segmentation model chosen to provide the baseline result is UNetFormer \cite{unetformer} and it was discussed in details in Chapter 2. The code for the model is written in PyTorch and is publically available at the author's Github page \href{https://github.com/WangLibo1995/GeoSeg}. The model can be summarised in Figure \ref{fig:initial-model}.
+
+\begin{figure}[!h]
+\includegraphics[width=13.0cm, height=8.5cm]{images/initial model.png}
+\caption{Proposed Initial Model for Baseline Performance}
+\label{fig:initial-model}
+\end{figure}
+
+Based on Figure \ref{fig:initial-model}, the training image are augmented as described in the previousection. Then, both the training images and masks would be cropped to reduce its size. All the components inside the red line belongs to UNetFormer. Patch embedding would be applied to the cropped images before it is fed into the encoder that is made up of four Swin Transformer. The encoder is connected to the decoder through a series of skip connections. The output from the decoder will be used to calculate the losses and to update the weights. This process is repeated as many times as the desired epoch value. Lastly, after it finishes all epoch, the output will be a collection of cropped black and white images. The cropped images will be merged to its original dimension. The mask produced will have a pixel values of 0-7 and this makes it impossible to assess its quality through visual inspection. We converted the 0-7 values to RGB values to make it eassier to assess. 
 \section{Model Evaluation}
+
+The most common evaluation metric used by semantic segmentation is the mean Intersection over Union (mIou). The mIoU is also known as the Jaccard Index or the Jaccard similarity coefficeint. The IoU for a single class is defined as:
+\begin{equation}
+    IoU = \frac{True Positives}{True Positives + False Positives + False Negatives}
+\end{equation}
+
+We get the mIoU by finding the mean of the IoU for all of the classes.
+
+Accuracy is the ratio of correct predictions and can be calculated as:
+\begin{equation}
+     Accuracy = \frac{True Positives + True Negatives}{True Positives + True Negatives + False Positives + False Negatives}
+ \end{equation}
+
+ F1-score gives the accuracy of the model by combining precision and recall and it is widely preferred for imbalanced dataset. Precision, recall and F1-score can be calculated as:
+ \begin{equation}
+     Precision = \frac{True Positive}{True Positive + False Positive}
+ \end{equation}
+ \begin{equation}
+     Recall = \frac{True Positive}{True Positive + False Negative}
+ \end{equation}
+\begin{equation}
+     F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}
+ \end{equation}
+
+ We used all five of the evaluation metrics to evaluate our model.
+
+
 
 \section{Model Refinement}
