@@ -705,12 +705,20 @@ The three tables below contain the F1-score, mIou score and accuracy score of ea
 
     Transformers has shown excellent scalability in Natural Language Processing. However, when transformers were initially used for computer vision, a lot of researchers doubted it ability to scale because all of the networks are dense as it has to process every pixel as input. Fortunately, there are recent works that shows we can improve the scalability of transformer by increasing its efficiency and reducing its computational load. Vision MoE from Google managed to match the performance of SOTA networks, while slashing the compute time into half by using a sparse network. It managed to train a 15 billions parameter model with 90.35\% accuracy on ImageNet dataset \cite{scaling-sparse}. Figure \ref{fig:scaling} shows the recorded number of parameters in Vision Transformer models from 2018 until 2022
 
-\begin{figure}[ht]
+\begin{figure}[!h]
 \includegraphics[width=8cm, height=5.5cm]{images/scaling.png}
 \centering
-\caption{The size records of Vision Transformer in recent years}
+\caption{The size records of Vision Transformer in recent years. Retrieved from paperswithcode.com}
 \label{fig:scaling}
 \end{figure}
 \end{enumerate}
 
+\section{Pruning Vision Transformer}
 
+Pruning a deep learning model is a technique to reduce the number of its parameters in order to reduce storage, memory, battery, and hardware consumption without sacrificing its performance. This would allow us to deploy the model and guarantee that it would run smoothly on every device. This section would discuss several techniques to prune a Vision Transformer.
+
+The easiest way to prune a deep learning model is to set a minimum threshold of weight at the end of a layer and any values that is smaller than that threshold will be change to zero. However this method would greatly decrease the performance of the model.
+
+The first comprehensive method to prune a Vision Transformer is to learn its associated importance score before pruning its parameters \cite{pruning-vit}.For the features $x \in \mathbb{R}^{n \times d}$ , where $n$ is the number of features that we want to prune and $d$ is the dimension of each feature, the proposed method will preserve the generated important features and remove the useless ones. Suppose the optimal importance score is $a^* \in \mathbb{R}^d$. Thid method is applied on DeiT-base \cite{deit} trained on ImageNet-1k and ImageNet 100. They managed to reduce the number of parameters by 66.4\% while maintaining the same accuracy with the unpruned model. 
+
+The second pruning method reviewed is block pruning \cite{pruning-block}. They found out that pruning individual parameter is a very hard task for Transformer. They proposed to partition each matrix in the Transformer into multpple fixed-sized blocks. Every acts as an individual group in the regularization with a shared score parameter and a different mask would be applied to each block. This method has not been used alongside a Vision Transformer but they did use it to train BERT \cite{bert}, an encoder-only Transformer language model with 110M parameters for question answering and sentence classification. Overall, they managed to reduce the number of parameters by a factor of 0.25 and increase the training with only a 2\% drop in F1 score.
