@@ -6,7 +6,7 @@ The last few years have seen a massive surge in research regarding deep learning
 
 The emergence of the term "semantic segmentation" can be traced back to the 1970s \cite{YU201882}. At that time, this terminology was equivalent to non-semantic image segmentation but emphasized that the segmented regions must contain a "semantic meaning" hence where the semantic part of the word comes from. Semantic segmentation algorithms calssify each pixel into a class. On the other hand, non-semantic segmentation algorithms try to detect consistent regions or region boundaries and it can be solved using many unsupervised algorithms. 
 
-In the 1990s, “object segmentation and recognition” is a two-class image segmentation problem which is to separate foregrounf objects from background. As the task is quite challenging, a relaxed two-class image segmentation problem: the sliding window object detection, was proposed to partition objects with bounding boxes. However, two-class image segmentation cannot tell what these segmented objects are. As a result, the generic sense of object detection was gradually extended to multi-class image labeling, which is the present definition of semantic segmentation, to tell both where and what the objects in the scene.
+In the 1990s, “object segmentation and recognition” is a two-class image segmentation problem which is to separate foreground objects from background. As the task is quite challenging, a relaxed two-class image segmentation problem: the sliding window object detection, was proposed to partition objects with bounding boxes. However, two-class image segmentation cannot tell what these segmented objects are. As a result, the generic sense of object detection was gradually extended to multi-class image labeling, which is the present definition of semantic segmentation, to tell both where and what the objects in the scene.
 
 \begin{figure}[ht]
 \includegraphics[width=12cm, height=6cm]{images/semantic segmentation example.jpg}
@@ -24,7 +24,7 @@ In the 1990s, “object segmentation and recognition” is a two-class image seg
 
 \section{Introduction to Satellite Images}
 
-Satellite images are images of the Earth that are collected by either drones or observation satellites. Observation satellites are satellites that are designed to observe the Earth from orbit while equipped with sensors that measure a range of  electromagnetic spectrum such as UV, visible, infrared, microwave, or radio. 
+Satellite images are images of the Earth that are collected by observation satellites. Observation satellites are satellites that are designed to observe the Earth from orbit while equipped with sensors that measure a range of  electromagnetic spectrum such as UV, visible, infrared, microwave, or radio. 
 
 There are 3 types of resolution that one should consider when working with satellite images. Namely the resolutions are the spatial resolution, spectral resolution and temporal resolution.
 
@@ -77,24 +77,23 @@ Lastly, temporal resolution refers to the time period between capturing two cons
 \section{Problem Statement}
 
 \begin{enumerate}
-    \item Most of the datasets studied suffer from class imbalanced meaning that the number of classes in the samples are not equally distributed. This is a very common problem in semantic segmentation task.
-    \item The self-attention mechanism in Vision Transformers is $0(n^2)$ and this makes it unsuitable for semantic segmentation of large images such as satelllite images as satellite images have very high resolution compared to normal images.
+    \item Most of the models reviewed are either not trained using satellite images or the dataset have very low resolution and dimensions. 
     \item Most of the semantic segmentation models reviewed are proposed before 2022 and they use CNN as Vision Transformer is a new development.  
-
-\end{enumerate}
+    \item Vision Transformer models are too large hence making it unsuitable for real-world applications.
+    \end{enumerate}
 
 
 \section{Project Objectives}
 \begin{enumerate}
-    \item Identify suitable datasets of satellite images that will be used for training and validation. Multiple datasets will be evaluated and a new dataset would be constructed if necessary.
-    \item Design and train a semantic segmentation model with a Transformer backbone to perform using chosen dataset.
-    \item Identify self-attention models that are linear to be used in the model.
+    \item Identify suitable datasets of satellite images that will be used for training and validation. Multiple datasets will be evaluated and a new dataset would be constructed if necessary. The dataset must contain a minimal class imbalanced.
+    \item Identify and train a semantic segmentation model with a Transformer-based encoder-decoder model to perform using chosen dataset to get a baseline result. We would also train a CNN model using the same dataset to get a comparison.
+    \item Identify the appropriate steps that can be taken to compress the Transformer model while maintaining its performance.
 \end{enumerate}
 \section{Project Scope}
 
-The scope of the dataset used in this project will be limited to satellite images. The chosen dataset must have a spatial resolution that is small enough to avoid any losses of information. On top of that, the dataset must be bigger than 240x240 (px). The dataset must have been taken by a satellite. There is no restriction on the type of bands that the dataset can have.
+The scope of the dataset used in this project will be limited to satellite images. The chosen dataset must have a spatial resolution that is small enough to avoid any losses of information. On top of that, the dataset must be bigger than 240x240 pixels. The dataset must have been taken by a satellite. There is no restriction on the type of bands that the dataset can have.
 
-The scope of the network proposed in this project must be one based on vision transformer.  The vision transformer network must be able to perform semantic segmentation task of satellite images. The performance of the proposed vision transformer network shall be compared to the  previous works trained on the same dataset.
+The scope of the network proposed in this project must be one based on Vision Transformer.  The Vision Transformer network must be able to perform semantic segmentation task of satellite images. The performance of the proposed vision transformer network shall be compared to the  previous works trained on the same dataset.
 
 \section{Chapter Organization}
 

@@ -149,7 +149,11 @@ The initial model will be written using PyTorch, a deep learning library written
 \label{tab:libraries}
 \end{table}
 
-The model is trained on a computer with Nvidia GTX 1080 GPU. The semantic segmentation model chosen is UNetFormer \cite{unetformer} and it was discussed in detail in Chapter 2. On the other hand, we get the baseline result by training the same a U-Net model with ResNet18 backbone using the same dataset. The code for the model is written in PyTorch and is publically available at the author's Github page \href{https://github.com/WangLibo1995/GeoSeg}. The model can be summarised in Figure \ref{fig:initial-model}.
+The model is trained on a computer with Nvidia GTX 2080 GPU. The semantic segmentation model chosen is UNetFormer \cite{unetformer} and it was discussed in detail in Chapter 2.
+
+masukkan transfer learning dengan pre-trained weights.
+
+On the other hand, we get the baseline result by training the same a U-Net model with ResNet18 backbone using the same dataset. The code for the model is written in PyTorch and is publically available at the author's Github page \href{https://github.com/WangLibo1995/GeoSeg}. The model can be summarised in Figure \ref{fig:initial-model}.
 
 \begin{figure}[!h]
 \includegraphics[width=13.0cm, height=8.5cm]{images/initial model.png}
