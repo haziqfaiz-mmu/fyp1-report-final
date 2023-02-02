@@ -26,7 +26,7 @@ Potsdam                                                               & Aerial  
 Vaihingen                                                             & Aerial                                                         & 33                  & 6                   & 1,281–3,816        & 0.09             & RGB                                                \\ \hline
 SEN12MS                                                               & \begin{tabular}[c]{@{}c@{}}Sentinel-1/2, \\ MODIS\end{tabular} & 180,662             & 33                  & 256x256            & 10               & \begin{tabular}[c]{@{}c@{}}SAR,\\ MSI\end{tabular} \\ \hline
 \end{tabular}
-\caption{Datasets for Semantic Segmentation Task}
+\caption{Datasets Reviewed for Semantic Segmentation Task}
 \label{tab:datasets}
 \end{table}
 \end{landscape}
@@ -189,10 +189,20 @@ The LandCover.ai dataset \cite{landcoverai} is a simple RGB-only dataset with sp
 
 \section{Semantic Segmentation Before Deep Learning}
 
-This section would elaborate on traditional methods of semantic segmentation, methods that do not apply any neural networks but make heavy use of domain knowledge and feature extraction methods. 
+This section would elaborate on traditional methods of semantic segmentation, methods that do not apply any neural networks for semantic segmentation. Before deep learning, semantic segmentation relied heavily on feature extraction and traditional machine learning (ML) algorithm as shown in Figure \ref{fig:trad}. These two methods are rendered obsolete by deep learning.
+
+\FloatBarrier
+\begin{figure}[ht]
+\includegraphics[width=5.5cm, height=7.5cm]{images/traditional.png}
+\centering
+\caption{Semantic Segmentation Before Deep Learning.}
+\label{fig:trad}
+\end{figure}
+\FloatBarrier
+
 
 \subsection{Feature Extraction}
-Before we apply any of the classification method that will be discussed in the proceeding sections (SVM, Random Decision Forest, MRF, CRF) we must extract the features from an image. The accuracy of traditional semantic segmentation methods heavily depends on the selected features. The features may be the numerical value of each pixel or the feature map containing the gradient of each pixel. There are three feature extraction methods discussed in this section, namely they are Histogram of Oriented Gradients, Scale-Invariant Feature Transform and Bag of Visual Words .
+Before we apply any of the traditional ML algorithm that will be discussed in the proceeding sections  we must extract the features from an image. The accuracy of traditional semantic segmentation methods heavily depends on the selected features. The features may be the numerical value of each pixel or the feature map containing the gradient of each pixel. There are three feature extraction methods discussed in this section, namely they are Histogram of Oriented Gradients, Scale-Invariant Feature Transform and Bag of Visual Words .
 
 \begin{enumerate}
     \item \textbf{\textit{Histogram of Oriented Gradients (HOG).}} HOG features interpret any given image as a discrete function $I : \mathbb{N}^2 \rightarrow \{0...255\}$ that maps a pair value $(x,y)$ which is the coordinate of the pixel to an RGB value. Then, the partial derivative in of \(x\) and \(y\) are calculated for every pixel. The input image is now transformed into a feature map with the gradient of each pixel. Lastly, the constructed feature map is divided into smaller patches and the direction and magnitude of the histogram is calculated for each patch. \cite{DBLP:journals/corr/Thoma16a}.
@@ -217,10 +227,11 @@ Before we apply any of the classification method that will be discussed in the p
     \item \textbf{\textit{Bag of Visual Words (BOV).}} BOV construct sparse histograms that contain the frequency of features in an image. Those features are usually extracted using SIFT \cite{DBLP:journals/corr/Thoma16a}. BOV is often used alongside other feature extractors such as SIFT by assigning each SIFT descriptor to the closest entry in a visual dictionary.
 \end{enumerate}
 
-\subsection{Random Decision Forest for Semantic Segmentation}
+\subsection{Traditional Machine Learning Algorithm}
+\subsubsection{Random Decision Forest for Semantic Segmentation}
  A decision tree is a tree where each leaf represents a class and each non-leaf nodes uses the feature inputs to decide which branch to descend to \cite{DBLP:journals/corr/Thoma16a}. A random decision tree is as decision tree that is injected with some randomness during the training phase  to reduce over-fitting and increase accuracy. Random Decision Forest is an unsupervised ensemble learning method that are made up of multiple independently constructed random decision trees. An in-depth explanation to semantic segmentation using Random Decision Forest is given by \cite{Schroff2008ObjectCS}. 
  
-\subsection{Support Vector Machines (SVM) for Semantic Segmentation}
+\subsubsection{Support Vector Machines (SVM) for Semantic Segmentation}
 
 In SVM the training data is represented as $(x_i,y_i)$ where $x_i$ is the feature vector, $y_i \in \{-1,1\}$ is the class label and $i \in \{1...m\}$ where m is the number of inputs.
 
@@ -252,7 +263,7 @@ Not every dataset is linearly separable thus this problem can be solved by trans
 
 The SVM described above can only distinguish between binary classes.The one-vs-all strategy and the one-vs-one strategy are methods used to expand it to be a multi-class classifier.. In the one-vs-all strategy n classifiers have to be trained which can distinguish one of the n classes against all other classes. In the one-vs-one strategy $\frac{n^2-n}{2}$ classifiers are trained; one classifier for each pair of classes.
 
-\subsection{Markov Random Field (MRF)} MRF maps an image onto an undirected graph where each node is a pair of random variable $(x,y)$ assigned to each pixel and the edges connect adjacent pixels \cite{YU201882}. $x$ represents the class label of a pixel and $y$ represents the RGB value of a pixel. Which means $x$ has a range of ${0...n}$ and y has a range of ${0...255}$ with $n$ being the number of classes.  Every edge is assigned conditional dependencies of its connecting nodes as weight. The probability of $x,y$ can be expressed as:
+\subsubsection{Markov Random Field (MRF)} MRF maps an image onto an undirected graph where each node is a pair of random variable $(x,y)$ assigned to each pixel and the edges connect adjacent pixels \cite{YU201882}. $x$ represents the class label of a pixel and $y$ represents the RGB value of a pixel. Which means $x$ has a range of ${0...n}$ and y has a range of ${0...255}$ with $n$ being the number of classes.  Every edge is assigned conditional dependencies of its connecting nodes as weight. The probability of $x,y$ can be expressed as:
 
 \begin{equation}
     P(x,y) = \frac{1}{Z} e^{-E(x,y)
@@ -260,7 +271,7 @@ The SVM described above can only distinguish between binary classes.The one-vs-a
 
 Where $Z = \sum_{x,y}e^{-E(x,y)}$ and it is called the partition function and $E$ is the energy function. A commonly used energy function is $E(x,y) = \sum_{c\in C}\psi_{c}(x,y)$, where $\psi$ is called the clique potential \cite{DBLP:journals/corr/Thoma16a}. A thorough presentation of MRF can be found in \cite{markovbook}. 
 
-\subsection{Conditional Random Field (CRF) for Semantic Segmentation} CRF is an extension of MRF. Instead of learning the distribution $P(x,y)$, it chooses to learn $P(x|y)$ \cite{DBLP:journals/corr/Thoma16a}. There are two advantages that CRF has over MRF. The first one being it does not to estimate the distribution of x. The second advantage is the consequence of the first one, as the distribution of x is not being estimated, less computation is required hence making CRF faster than MRF \cite{YU201882}. CRF has the partition function $Z(x)$:
+\subsubsection{Conditional Random Field (CRF) for Semantic Segmentation} CRF is an extension of MRF. Instead of learning the distribution $P(x,y)$, it chooses to learn $P(x|y)$ \cite{DBLP:journals/corr/Thoma16a}. There are two advantages that CRF has over MRF. The first one being it does not to estimate the distribution of x. The second advantage is the consequence of the first one, as the distribution of x is not being estimated, less computation is required hence making CRF faster than MRF \cite{YU201882}. CRF has the partition function $Z(x)$:
 \begin{equation}
     Z(x) = \sum_{x} P(x,y)
 \end{equation}
@@ -284,7 +295,7 @@ Where $Z = \sum_{x,y}e^{-E(x,y)}$ and it is called the partition function and $E
 
 Semantic segmentation task has been long dominated by Convolutional Neural network (CNN). The Fully Convolutional Network (FCN) \cite{7298965} is the first network proven to be an effective method to extract features automatically and serves as an effective end-to-end CNN structure for semantic segmentation task. The outcome of FCN, although encouraging, appears to be coarse due to the over-simplified design of the decoder.
 
-To tackle this problem, better CNNs were proposed such as U-Net \cite{unet} which  introduced the encoder-decoder framework. Since its introduction, the encoder-decoder framework has become the standard structure of satellite images segmentation network \cite{unetformer}. U-Net introduced two symmetric paths: a contracting path, which is also known as the encoder to extract local features, and an expanding path which is also called the decoder, for extracting position. The encoder gradually apply convolutions and max pooling to reduce the resolution of the feature map, while the decoder extracts contextual information by progressively restoring the spatial resolution. At every level of the decoder skip connections are used to by concatenate the output of the decoder with the feature maps from the encoder. Figure \ref{fig:unet} show the U-Net architecture. Benefiting from its translation equivariance and locality, U-Net enhances the semantic segmentation performance significantly and the encode-decoder framework has been a major influence towards semantic segmentation task. 
+To tackle this problem, better CNNs were proposed such as U-Net \cite{unet} which  introduced the encoder-decoder framework. Since its introduction, the encoder-decoder framework has become the standard structure of satellite images segmentation network \cite{unetformer}. U-Net introduced two symmetric paths: a contracting path, which is also known as the encoder to extract local features, and an expanding path which is also called the decoder, for extracting position. The encoder gradually apply convolutions and max pooling to reduce the resolution of the feature map, while the decoder extracts contextual information by progressively restoring the spatial resolution. At every level of the decoder skip connections are used to concatenate the output of the decoder with the feature maps from the encoder. Figure \ref{fig:unet} show the U-Net architecture. Benefiting from its translation equivariance and locality, U-Net enhances the semantic segmentation performance significantly and the encode-decoder framework has been a major influence towards semantic segmentation task. 
 
 \begin{figure}[ht]
 \includegraphics[width=10.5cm, height=7cm]{images/unet.png}
@@ -317,7 +328,7 @@ Spatial Attention U-Net (SA-Unet) \cite{improved-unet} uses atrous spatial pyram
 
 \section{Semantic Segmentation of Satellite Images Using Vision Transformers}
 
-Transformers were introduced by \cite{attention-is-all-you-need} and since its inception it has been the de facto model for Natural Language Processing (NLP). Transformers that are used for image processing are called Vision Transformers to differentiate it from its NLP counterpart. Vision Transformers essentially translates 2D image-based tasks into 1D sequence-based tasks.
+Transformers were introduced by \cite{attention-is-all-you-need} and since its inception it has been the de facto model for Natural Language Processing (NLP). Transformers that are used for computer vision are called Vision Transformers to differentiate it from its NLP counterpart. Vision Transformers essentially translates 2D image-based tasks into 1D sequence-based tasks.
 
 %%%%%benchmarking-scaling%%%%%%%
 Since its inception, there are lot of researches that aim to utilize Transformers for semantic segmentation of satellite images. 
@@ -325,7 +336,7 @@ Since its inception, there are lot of researches that aim to utilize Transformer
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ViT
 \subsection{Vision Transformer (ViT)}
-Vision Transformer from \cite{16x16} is the first group of researchers that experimented with Vision Transformer by applying a standard Transformer directly to images, with the fewest possible modifications. Their model is known as Vision Transformer (ViT) as it is the first Vision Transformer. They split an image into patches, apply linear embeddings to transform the patches into vectors and provide the sequence of those linear embedding as an input to a Transformer. The image patches were treated the same way as word tokens do in an NLP application. This methods fails to capture the  translation equivariance and locality provide by the CNNs hence it is unsuitable for semantic segmentation task.
+Vision Transformer from \cite{16x16} is the first group of researchers that experimented with Vision Transformer by applying a standard Transformer directly to images, with the fewest possible modifications. Their model is known as Vision Transformer (ViT) as it is the first Vision Transformer. They split an image into patches, apply linear embeddings to transform the patches into vectors and provide the sequence of those linear embedding as an input to a Transformer. The image patches were treated the same way as word tokens do in an NLP application. This methods fails to capture the local context provided  CNNs hence it is unsuitable for semantic segmentation task.
 
 Another issue with Vision Transformer is the attention mechanism itself is $O(n^2)$ because it is a dot product thus requiring it to consume significant computational time and memory to capture the global context, which in turn, reducing its efficiency, scaling potential and its potential for real-world applications. Figure \ref{fig:vit} shows the ViT architecture.
 
@@ -641,7 +652,7 @@ Enhanced Swin Transformer is a Swin Transformer  with enhanced multi-head self-a
     Attention(Q,K,V) = Softmax(\fraction{att(QK^T)}{\sqrt{d_k}}+B)V
 \end{equation}
 
-\subsection{Summary of Literature Review}
+\subsection{Summary of Semantic Segmentation Using Transformer}
 
 The three tables below contain the F1-score, mIou score and accuracy score of each semantic segmentation model reviewed.
 
@@ -725,11 +736,11 @@ The three tables below contain the F1-score, mIou score and accuracy score of ea
 
     \item \textit{\textbf{Attention Mechanism Complements Convolution}}
 
-    Unlike convolution which is a local operation, the attention mechanism is a global one which means it can model the relationship between all the pixels in an image. This two layers complement each other very well and works such as DETR \cite{detr} and Swin Transformer V2 \cite{swin-v2} are evidence of this claim.
+    Unlike convolution which is a local operation, the attention mechanism is a global one which means it can model the relationship between all the pixels in an image. CNN and Transformers complement each other very well and works such as DETR \cite{detr} and UNetFormer \cite{unetformer} are evidence of this claim.
 
     \item \textit{\textbf{Transformers Make It Easier for Parallel Processing}}
 
-        The sequential nature of Transformers makes it easier for researchers to utilizes parallel processing with TPUs compared whewn they are training CNN models. There are less steps to do parallel processing when training a Transformer model \cite{swin-v1}. This would save a lot of time and effort.
+        The sequential nature of Transformers makes it easier for researchers to utilizes parallel processing with TPUs compared when they are training CNN models. There are less steps to do parallel processing when training a Transformer model \cite{swin-v1}. This would save a lot of time and effort.
 
 
     \item \textit{\textbf{Transformers are Scalable}}
