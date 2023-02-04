@@ -14,7 +14,7 @@ The implementation of this project is split into five different steps namely Dat
 
 \section{Data Collection}
 
-There were 12 different datasets considered at the beginning of this project and their details can be found in Chapter 2. In the end, we decided to choose LoveDA dataset \cite{loveda} because of several reasons. The first reason is it has one of the lowest spatial resolution with 0.3m. The second reason is it has a total of 5,987 samples which we considered as a good number of samples. Te third reason is the images in LoveDA dataset is actually collected satellites unlike severeal other dataset that is a mixed of images collected through satellites and drones. The final reason is the images on LoveDA comes in PNG format which is much easier to work with compared to some other dataset that comes in GeoTIFF format. Although GeoTIFF carry more information, we concluded that the time and effort required to process and train models using GeoTIFF format is too much.
+There were 12 different datasets considered at the beginning of this project and their details can be found in Chapter 2. In the end, we decided to choose LoveDA dataset \cite{loveda} because of several reasons. The first reason is it has one of the lowest spatial resolution with 0.3m. The second reason is it has a total of 5,987 samples which we considered as a good number of samples. Te third reason is the images in LoveDA dataset is actually collected using satellites unlike several other dataset that is a mixed of images collected through satellites and drones. The final reason is the images on LoveDA comes in PNG format which is much easier to work with compared to some other dataset that comes in GeoTIFF format. Although GeoTIFF carry more information, we concluded that the time and effort required to process and train models using GeoTIFF format is too much.
 
 LoveDA dataset was introduced in Chapter 2 but here we are going to give a more detailed statistical analysis on the dataset. Table \ref{tab:class-loveda} explains the description of the classes in the dataset.
 
@@ -34,7 +34,7 @@ LoveDA dataset was introduced in Chapter 2 but here we are going to give a more 
 \label{tab:class-loveda}
 \end{table}
 
-Each pixel in the dataset is labelled as it is made specifically for sematic segmentation task. The images in LoveDA dataset are separated into two groups; the rural images and the urban images. Each of the group is already splitted into a training set, a validation set and a testing set. To be specific, the training set is composed of 2522 images , the validation set is composed of1669 images  and the 1796 images is used for testing.  The structure of the dataset is shown in figure \ref{fig:loveda-structure} .
+Each pixel in the dataset is labelled as it is made specifically for sematic segmentation task. The images in LoveDA dataset are separated into two groups; the rural images and the urban images. Each of the group is already splitted into a training set, a validation set and a testing set. To be specific, the training set is composed of 2522 images , the validation set is composed of 1669 images  and the 1796 images is used for testing.  The structure of the dataset is shown in figure \ref{fig:loveda-structure} .
 
 \FloatBarrier
 \begin{figure}[!h]
