@@ -772,8 +772,8 @@ The first comprehensive method to prune a Vision Transformer is to learn its ass
 
 \citeA{pruning-block} also categorized pruning into three methods. The first one being the score-based pruning methods \cite{score-pruning} which modify the model by introducing score parameters \textbf{S} for each parameter \textbf{i} and replace the original parameter matrices with a masked version. The simplest one would be to zero-out the parameters with the lowest value as discussed earlier. The second pruning method is movement pruning which ncourages the model to fine-tune the parameters while lowering the scores of unimportant parameters and thus encouraging more sparsity. 
 
-The third pruning method is block movement pruning \cite{pruning-block} which is a hybrid of movement and block pruning. They proposed to partition each matrix in the Transformer into multiple fixed-sized blocks. Every block acts as an individual group in the regularization with a shared score parameter and a different mask would be applied to each block. This method has not been used alongside a Vision Transformer but they did use it to train BERT \cite{bert}, an encoder-only Transformer language model with 110M parameters for question answering and sentence classification. Overall, they managed to reduce the number of parameters by a factor of 5.91 and increase the training with only a 1.99\% drop in F1 score. The full result can be seen in table \ref{tab:block-movement}.
-
+The third pruning method is block movement pruning \cite{pruning-block} which is a hybrid of movement and block pruning. They proposed to partition each matrix in the Transformer into multiple fixed-sized blocks. Every block acts as an individual group in the regularization with a shared score parameter and a different mask would be applied to each block. This method has not been used alongside a Vision Transformer but they did use it to train BERT \cite{bert}, an encoder-only Transformer language model with 110M parameters for question answering and sentence classification. Overall, they managed to reduce the number of parameters by a factor of 5.91 and increase the training with only a 1.99\% drop in F1 score. The full result of using movement block pruning can be seen in table \ref{tab:block-movement}.
+\FloatBarrier
 \begin{table}[!h]
 \centering
 \begin{tabular}{|c|c|c|c|c|}
@@ -786,6 +786,7 @@ The third pruning method is block movement pruning \cite{pruning-block} which is
 \textit{\textbf{Block Movement}} & \cellcolor[HTML]{FFFFFF}15M & \cellcolor[HTML]{FFFFFF}5.44 & \cellcolor[HTML]{FFFFFF}2.26        & \cellcolor[HTML]{FFFFFF}87.15    \\ \hline
 \textit{\textbf{Block Movement}} & \cellcolor[HTML]{FFFFFF}14M & \cellcolor[HTML]{FFFFFF}5.91 & \cellcolor[HTML]{FFFFFF}2.24        & \cellcolor[HTML]{FFFFFF}86.51    \\ \hline
 \end{tabular}
-\caption{Parameters Count, Compression Rate, Speed gain relative to BERT-base and F1.}
+\caption{Parameters Count, Compression Rate, Speed gain relative to BERT-base and F1 \cite{pruning-block}.}
 \label{tab:block-movement}
 \end{table}
+\FloatBarrier
