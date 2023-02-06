@@ -766,13 +766,30 @@ An example of unstructured pruning is to set a minimum threshold of weight at th
 Structured pruning is a challenging task deep neural networks are made up of a large number of basic modules like convolution, normalization, or attention, that are intrinsically connected. As an example, if we seek to remove only one layer from a Transformer, we have to inevitably take care of its inter-
 dependencies to all layers simultaneously, otherwise we will end up with a broken network.
 
-The first comprehensive method to prune a Vision Transformer is to learn its associated importance score before pruning its parameters \cite{pruning-vit}. For the features $x \in \mathbb{R}^{n \times d}$ , where $n$ is the number of features that we want to prune and $d$ is the dimension of each feature, the proposed method will preserve the generated important features and remove the useless ones. Suppose the optimal importance score is $a^* \in \mathbb{R}^d$. This method is applied on DeiT-base \cite{deit} trained on ImageNet-1k and ImageNet 100. They managed to reduce the number of parameters by 66.4\% while maintaining the same accuracy with the unpruned model.
+The first comprehensive method to prune a Vision Transformer is to learn its associated importance score before pruning its parameters \cite{pruning-vit}. For the features $x \in \mathbb{R}^{n \times d}$ , where $n$ is the number of features that we want to prune and $d$ is the dimension of each feature, the proposed method will preserve the generated important features and remove the useless ones. Suppose the optimal importance score is $a^* \in \mathbb{R}^d$. This method is applied on DeiT-base \cite{deit} trained on ImageNet-1k and ImageNet 100. 
+
+\FloatBarrier
+\begin{table}[]
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{Dataset} & \textbf{Model} & \textbf{Pruning Rate} & \multicolumn{1}{l|}{\textbf{Params (M)}} & \multicolumn{1}{l|}{\textbf{Flops (B)}} & \multicolumn{1}{l|}{\textbf{Accuracy}} \\ \hline
+ImageNet-100     & Deit           & 0                     & 86.4                                     & 17.6                                    & 98.94                                  \\ \hline
+ImageNet-100     & Deit           & 0.2                   & 66.1                                     & 13.7                                    & 98.36                                  \\ \hline
+ImageNet-100     & Deit           & 0.4                   & 47.3                                     & 10.0                                    & 98.04                                  \\ \hline
+ImageNet-1k      & Deit           & 0                     & 86.4                                     & 17.6                                    & 81.8                                   \\ \hline
+ImageNet-1k      & Deit           & 0.2                   & 67.3                                     & 13.8                                    & 81.3                                   \\ \hline
+ImageNet-1k      & Deit           & 0.4                   & 48.0                                     & 10.0                                    & 80.7                                   \\ \hline
+\end{tabular}
+\caption{The result of Pruning Vision Transformer \cite{pruning-vit}.}
+\label{tab:pruning}
+\end{table}
+\FloatBarrier
 
 \citeA{pruning-block} identified that there are three ways to compress a model. The first method is distillation which utilize targeted distillation to produce smaller models with a dense structure that is fast on standard hardware. Distillation has been proven succesful in language models such as DistilBERT \cite{distilbert} and TinyBERT \cite{tinybert} which are all compressed versions of BERT \cite{bert}. The second method is pruning and third method is a combination of pruning and distillation. Distillation requires a very tedious engineering process and it is very hard to achieve.
 
 \citeA{pruning-block} also categorized pruning into three methods. The first one being the score-based pruning methods \cite{score-pruning} which modify the model by introducing score parameters \textbf{S} for each parameter \textbf{i} and replace the original parameter matrices with a masked version. The simplest one would be to zero-out the parameters with the lowest value as discussed earlier. The second pruning method is movement pruning which ncourages the model to fine-tune the parameters while lowering the scores of unimportant parameters and thus encouraging more sparsity. 
 
-The third pruning method is block movement pruning \cite{pruning-block} which is a hybrid of movement and block pruning. They proposed to partition each matrix in the Transformer into multiple fixed-sized blocks. Every block acts as an individual group in the regularization with a shared score parameter and a different mask would be applied to each block. This method has not been used alongside a Vision Transformer but they did use it to train BERT \cite{bert}, an encoder-only Transformer language model with 110M parameters for question answering and sentence classification. Overall, they managed to reduce the number of parameters by a factor of 5.91 and increase the training with only a 1.99\% drop in F1 score. The full result of using movement block pruning can be seen in table \ref{tab:block-movement}.
+The third pruning method is block movement pruning \cite{pruning-block} which is a hybrid of movement and block pruning. They proposed to partition each matrix in the Transformer into multiple fixed-sized blocks. Every block acts as an individual group in the regularization with a shared score parameter and a different mask would be applied to each block. This method has not been used alongside a Vision Transformer but they did use it to train BERT \cite{bert}, an encoder-only Transformer language model with 110M parameters for question answering and sentence classification. Overall, they managed to reduce the number of parameters by a factor of 5.91 and trained it $2.24$ times faster with only a 1.99\% drop in F1 score. The full result of using movement block pruning can be seen in table \ref{tab:block-movement}.
 \FloatBarrier
 \begin{table}[!h]
 \centering
@@ -786,7 +803,7 @@ The third pruning method is block movement pruning \cite{pruning-block} which is
 \textit{\textbf{Block Movement}} & \cellcolor[HTML]{FFFFFF}15M & \cellcolor[HTML]{FFFFFF}5.44 & \cellcolor[HTML]{FFFFFF}2.26        & \cellcolor[HTML]{FFFFFF}87.15    \\ \hline
 \textit{\textbf{Block Movement}} & \cellcolor[HTML]{FFFFFF}14M & \cellcolor[HTML]{FFFFFF}5.91 & \cellcolor[HTML]{FFFFFF}2.24        & \cellcolor[HTML]{FFFFFF}86.51    \\ \hline
 \end{tabular}
-\caption{Parameters Count, Compression Rate, Speed gain relative to BERT-base and F1 \cite{pruning-block}.}
+\caption{Parameters Count, Compression Rate, Speed gain relative to BERT-base and F1.}
 \label{tab:block-movement}
 \end{table}
 \FloatBarrier
