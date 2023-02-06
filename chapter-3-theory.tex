@@ -177,9 +177,9 @@ The goal of backpropagation is to compute the partial derivative $\frac{\partial
     C(X,\theta) = \frac{1}{2n} \sum_x ||\hat{y}(x) - y(x)||^2 
 \end{equation}
 
-where $n$ is the total number of training examples; the sum is over individual training examples, $x$; $\hat{y}(x)$ is the corresponding desired output; and $y(x)}$ is the vector of activations output from the network when $x$ is input.
+where $n$ is the total number of training examples; the sum is over individual training examples, $x$; $\hat{y}(x)$ is the corresponding desired output; and y(x) is the vector of activations output from the network when $x$ is input.
 
-In this example $C$ is the Euclidean distance betwween $y(x)$ and $a^L(x)$ which is a very common choice when training a neural network.Backpropagation attempts to minimize $C$ with respect to the neural network's weights by calculating, for each weight $w_{ij}^k$, the value of $\frac{\partial C}{\partial w_{ij}^k}$. At each iteration, the weights and biases (collectively denoted as $\theta$) is updated according to the learning rate, $\alpha$ as follows:
+In this example $C$ is the Euclidean distance between $y(x)$ and $a^L(x)$ which is a very common choice when training a neural network.Backpropagation attempts to minimize $C$ with respect to the neural network's weights by calculating, for each weight $w_{ij}^k$, the value of $\frac{\partial C}{\partial w_{ij}^k}$. At each iteration, the weights and biases (collectively denoted as $\theta$) is updated according to the learning rate, $\alpha$ as follows:
 \begin{equation}
     \theta^{t+1} = \theta^t - \alpha \frac{\partial C(X,\theta^t)}{\partial \theta}
 \end{equation}
@@ -203,7 +203,7 @@ The derivation of the backpropagation algorithm begins by applying the chain rul
         \cite{weakly-supervised-semantic} identified that a lot of semantic segmentation models doesn't work well under weak supervision. In this paper weak supervision is defined as using dataset that fulfil at least one of this criteria:
 \begin{enumerate}
     \item \textit{Incomplete Supervision} - The dataset is small and insufficient to train a good model.
-    \item \textit{Inexact supervision} - The labelling is not as exact as necessary which usually occurss in land cover labels with low resolution.
+    \item \textit{Inexact supervision} - The labelling is not as exact as necessary which usually occurs in land cover labels with low resolution.
     \item \textit{Inaccurate supervision} - The labels are wrong.
 \end{enumerate}
 \item \textbf{Inadequate Computing Resource}
@@ -212,3 +212,4 @@ The derivation of the backpropagation algorithm begins by applying the chain rul
 
 
 \end{enumerate}
+

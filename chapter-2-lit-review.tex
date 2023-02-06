@@ -1,4 +1,3 @@
-
 %!TEX ROOT = thesis.tex
 \chapter{LITERATURE REVIEW}
 \label{chapter: 2}
@@ -36,7 +35,7 @@ SEN12MS                                                               & \begin{t
 Table \ref{tab:datasets} shows the list of dataset that were evaluated and considered for this project. Each of the dataset is made for semantic segmentation task meaning that each pixel in the dataset is labelled. All of the datasets except for Potsdam and Vaihingen can be downloaded using the TorchGeo library. 
 
 %%Potsdam%%%
-The Potsdam and Vaihingen datasets \cite{potsdam-vaihingen} are datasets made specifically for urban semantic segmentation used in the 2D Semantic Labeling Contest - Potsdam and 2D Semantic Labeling Contest - Vaihingen respectively. Both of the datasets are available upon request \href{https://www.isprs.org/education/benchmarks/UrbanSemLab/detection-and-reconstruction.aspx#VaihigenDataDescr}{here}. Although the images are not taken by satellites, a lot of literature reviewed such as \cite{unetformer}, \cite{a-novel-transformer}, \cite{multi-attention-network} and \cite{A2-FPN} train their semantic segmentation model using these datasets thus we think these merit a bit of discussions. Vaihingen dataset is composed of 33 orthorectified image tiles acquired by a near NIR-RGB drone camera, over the town of Vaihingen, Germany. The average size of the images is 20494 x 20064 pixels with a spatial resolution of 9 cm. Potsdam dataset is composed of 38 orthorectified image tiles acquired  over the town of Potsdam using the same NIR-RGB drone camera.. The average size of the tiles is also 20494 x 20064 pixels but with a smaller spatial resolution of 5 cm. Images in both datasets are accompanied by a digital surface model (DSM) representing the absolute height of pixels. There are a total of 6 classes in each dataset: impervious surfaces (roads, concrete surfaces), buildings, low vegetations, trees, cars and clutters (represents uncategorizable land covers).  Figure \ref{fig:potsdam-image} and \ref{fig:potsdam-mask} shows a pair of an image and its corresponding mask from the Potsdam dataset while Figure \ref{fig:vaihingen-image} and \ref{fig:vaihingen-mask} show the ones from Vaihingen dataset.
+The Potsdam and Vaihingen datasets \cite{potsdam-vaihingen} are datasets made specifically for urban semantic segmentation used in the 2D Semantic Labeling Contest - Potsdam and 2D Semantic Labeling Contest - Vaihingen respectively. Both of the datasets are available upon request \href{https://www.isprs.org/education/benchmarks/UrbanSemLab/detection-and-reconstruction.aspx#VaihigenDataDescr}{here}. Although the images are not taken by satellites, a lot of literature reviewed such as \cite{unetformer}, \cite{a-novel-transformer}, \cite{multi-attention-network} and \cite{A2-FPN} train their semantic segmentation model using these datasets thus we think these merit a bit of discussions. Vaihingen dataset is composed of 33 orthorectified image tiles acquired by a near NIR-RGB drone camera, over the town of Vaihingen, Germany. The average size of the images is 20494 x 20064 pixels with a spatial resolution of 9 cm. Potsdam dataset is composed of 38 orthorectified image tiles acquired  over the town of Potsdam using the same NIR-RGB drone camera.. The average size of the tiles is also 20494 x 20064 pixels but with a smaller spatial resolution of 5 cm. Images in both datasets are accompanied by a digital surface model (DSM) representing the absolute height of pixels. There are a total of 6 classes in each dataset: impervious surfaces (roads, concrete surfaces), buildings, low vegetation, trees, cars and clutters (represents uncategorizable land covers).  Figure \ref{fig:potsdam-image} and \ref{fig:potsdam-mask} shows a pair of an image and its corresponding mask from the Potsdam dataset while Figure \ref{fig:vaihingen-image} and \ref{fig:vaihingen-mask} show the ones from Vaihingen dataset.
 
 
 \begin{figure}[!htb]
@@ -163,7 +162,7 @@ Figure \ref{fig:deep-globe-image} and \ref{fig:deep-globe-mask} shows an example
 
 
 
-The LandCover.ai dataset \cite{landcoverai} is a simple RGB-only dataset with spatial resolution of 25 or 50 cm per pixel. There are 33 images with resolution 25 cm(9000 × 9500 px) and 8 images with resolution 50 cm (4200 × 4700 px). Pixel-wise annotations are made manually with VGG Image Annotator (VIA) by a group of people using polygon shape and polylines. LandCover.ai dataset has 5 classes: buildings, woodlands, water, roads and background. Figure \ref{fig:landcover-image} and \ref{fig:landcover-mask} show a pair of its image and mask.
+The LandCover.ai dataset \cite{landcoverai} is a simple RGB-only dataset with spatial resolution of 25 or 50 cm per pixel. There are 33 images with resolution 25 cm(9000 × 9500 pixels) and 8 images with resolution 50 cm (4200 × 4700 pixels). Pixel-wise annotations are made manually with VGG Image Annotator (VIA) by a group of people using polygon shape and polylines. LandCover.ai dataset has 5 classes: buildings, woodlands, water, roads and background. Figure \ref{fig:landcover-image} and \ref{fig:landcover-mask} show a pair of its image and mask.
 
 \FloatBarrier
 \begin{figure}[!htb]
@@ -183,9 +182,6 @@ The LandCover.ai dataset \cite{landcoverai} is a simple RGB-only dataset with sp
     \end{minipage}
 \end{figure}
 \FloatBarrier
-
-
-
 
 \section{Semantic Segmentation Before Deep Learning}
 
@@ -264,9 +260,8 @@ Not every dataset is linearly separable thus this problem can be solved by trans
 The SVM described above can only distinguish between binary classes.The one-vs-all strategy and the one-vs-one strategy are methods used to expand it to be a multi-class classifier.. In the one-vs-all strategy n classifiers have to be trained which can distinguish one of the n classes against all other classes. In the one-vs-one strategy $\frac{n^2-n}{2}$ classifiers are trained; one classifier for each pair of classes.
 
 \subsubsection{Markov Random Field (MRF)} MRF maps an image onto an undirected graph where each node is a pair of random variable $(x,y)$ assigned to each pixel and the edges connect adjacent pixels \cite{YU201882}. $x$ represents the class label of a pixel and $y$ represents the RGB value of a pixel. Which means $x$ has a range of ${0...n}$ and y has a range of ${0...255}$ with $n$ being the number of classes.  Every edge is assigned conditional dependencies of its connecting nodes as weight. The probability of $x,y$ can be expressed as:
-
 \begin{equation}
-    P(x,y) = \frac{1}{Z} e^{-E(x,y)
+    P(x,y) = \frac{1}{Z} e^{-E(x,y)}
 \end{equation}
 
 Where $Z = \sum_{x,y}e^{-E(x,y)}$ and it is called the partition function and $E$ is the energy function. A commonly used energy function is $E(x,y) = \sum_{c\in C}\psi_{c}(x,y)$, where $\psi$ is called the clique potential \cite{DBLP:journals/corr/Thoma16a}. A thorough presentation of MRF can be found in \cite{markovbook}. 
@@ -290,6 +285,7 @@ Where $Z = \sum_{x,y}e^{-E(x,y)}$ and it is called the partition function and $E
     \item  Feature extraction method such as SIFT and Random Decision Forest require researchers to come up with a good hand-crafted feature to achieve high accuracy while good features are very hard to produce. Compared this with the automatically learned features provided by deep learning, traditional methods would require a lot more time and effort.
 
 \end{enumerate}
+
 
 \section{Semantic Segmentation of Satellite Images Using Convolutional Neural Networks}
 
@@ -315,7 +311,7 @@ Attention U-Net \cite{attention-unet} is a model that aims to improve U-Net by i
 \label{fig:attention-unet}
 \end{figure}
 
-U-Net with added attention mechanism is the approach favored by most literature focusing on semantic segmentation of satellite images. Multi Attention U-Net(MA-Unet) \cite{multi-attention-unet}  uses residual structure and simple attention modules. According to figure \ref{fig:maunet} the decoder in MA-Unet uses transposed convolution and attention modules at every feature fusion stage. MAUnet performed semantic segmentation task on the WHDLD datasets and DLRSD datasets. WDLD dataset have 8 classes while DLRSD dataset have 17 classes covering common classes such as farms, grasslands and lakes. MA-Unet was compareed with other U-Net based models susch as U-Net, U-Net++, Attention U-Net and MagNet on the same task. MA-Unet performs better at segmenting classes with fine details such aeroplanes. MA-Unet has the highest mIOU on both dataset with 63.94\% on WHDLD and 61.90\% on DLRSD.
+U-Net with added attention mechanism is the approach favored by most literature focusing on semantic segmentation of satellite images. Multi Attention U-Net(MA-Unet) \cite{multi-attention-unet}  uses residual structure and simple attention modules. According to figure \ref{fig:maunet} the decoder in MA-Unet uses transposed convolution and attention modules at every feature fusion stage. MAUnet performed semantic segmentation task on the WHDLD datasets and DLRSD datasets. WDLD dataset have 8 classes while DLRSD dataset have 17 classes covering common classes such as farms, grasslands and lakes. MA-Unet was compared with other U-Net based models such as U-Net, U-Net++ and Attention U-Net on the same task. MA-Unet performs better at segmenting classes with fine details such aeroplanes. MA-Unet has the highest mIoU on both dataset with 63.94\% on WHDLD and 61.90\% on DLRSD.
 
 Spatial Attention U-Net (SA-Unet) \cite{improved-unet} uses atrous spatial pyramid pooling as its encoder and attention modules at every skip connection like we have seen in Attention U-Net.  \cite{attention-unet-road} employs U-Net with attention to extract roads from satellite images. Instead of using simple attention modules at every skip connections, they uses attention module only once at the lowest skip connection.
 
@@ -328,7 +324,7 @@ Spatial Attention U-Net (SA-Unet) \cite{improved-unet} uses atrous spatial pyram
 
 \section{Semantic Segmentation of Satellite Images Using Vision Transformers}
 
-Transformers were introduced by \cite{attention-is-all-you-need} and since its inception it has been the de facto model for Natural Language Processing (NLP). Transformers that are used for computer vision are called Vision Transformers to differentiate it from its NLP counterpart. Vision Transformers essentially translates 2D image-based tasks into 1D sequence-based tasks.
+Transformers were introduced by \cite{attention-is-all-you-need} and since its inception it has been the de-facto model for Natural Language Processing (NLP). Transformers that are used for computer vision are called Vision Transformers to differentiate it from its NLP counterpart. Vision Transformers essentially translates 2D image-based tasks into 1D sequence-based tasks.
 
 %%%%%benchmarking-scaling%%%%%%%
 Since its inception, there are lot of researches that aim to utilize Transformers for semantic segmentation of satellite images. 
@@ -348,7 +344,7 @@ Another issue with Vision Transformer is the attention mechanism itself is $O(n^
 \end{figure}
 
 \subsection{Swin Transformer}
-The first version of Swin Transformer \cite{swin-v1} presents a hierarchical feature representation scheme that demonstrates impressive performances with linear computational complexity, which makes it suitable for semantic segmentation. Just like in ViT, Swin Tansformer will use patch embedding to the input image but the difference now is the patch size is 4x4x3 instead of 16x16x3. The biggest difference between ViT and Swin Transformer is ViT attention layers work on the entire image while Swin Transformer will firsst compute attention on local windows. Take an example in figure \ref{fig:swin-vs-vit}, the input image is 16x16 and Swin Transformer will first use 16 non-overlapping local windows to divide the image into 16 patches. As self-attention is computed at local window, they only handle the relationships between 16 image patches. At the next level, Swin Transformer merges neighboring patches to form 4 new local windows. Again, self-attention layers is computed within each local window. Therefore, those layers only deal with 16 feature patches hence maintaining the number of patches at every level. Eventually, one local window covers the entire image with 16 feature patches.
+The first version of Swin Transformer \cite{swin-v1} presents a hierarchical feature representation scheme that demonstrates impressive performances with linear computational complexity, which makes it suitable for semantic segmentation. Just like in ViT, Swin Transformer will use patch embedding to the input image but the difference now is the patch size is 4x4x3 instead of 16x16x3. The biggest difference between ViT and Swin Transformer is ViT attention layers work on the entire image while Swin Transformer will first compute attention on local windows. Take an example in figure \ref{fig:swin-vs-vit}, the input image is 16x16 and Swin Transformer will first use 16 non-overlapping local windows to divide the image into 16 patches. As self-attention is computed at local window, they only handle the relationships between 16 image patches. At the next level, Swin Transformer merges neighboring patches to form 4 new local windows. Again, self-attention layers is computed within each local window. Therefore, those layers only deal with 16 feature patches hence maintaining the number of patches at every level. Eventually, one local window covers the entire image with 16 feature patches.
 \FloatBarrier
 \begin{figure}[ht]
 \includegraphics[width=9.5cm, height=5.5cm]{images/swin vs vit.png}
@@ -369,11 +365,11 @@ In stage 2, the patch merging layer concatenates the features of each group of 2
 \label{fig:swin architecture1}
 \end{figure}
 
-The self-attention modeule in ViT has $O(n^2) $computational complexity to the number of tokens which makes it unsuitable forsemantic segmentation which require dense high-resolution classifications. Swin Transformer introduced a Shifted Window Multi-headed Self-Attention (W-MSA) to make the self-attetion linear to the number of tokens. The computational complexity of the original Multi-Headed Self-Attention is:
+The self-attention module in ViT has $O(n^2) $computational complexity to the number of tokens which makes it unsuitable for semantic segmentation which require dense high-resolution classifications. Swin Transformer introduced a Shifted Window Multi-headed Self-Attention (W-MSA) to make the self-attention linear to the number of tokens. The computational complexity of the original Multi-Headed Self-Attention is:
 \begin{equation}
     \Omega (\mathbf{MSA}) = 4hwC^2 + 2(hw)^2C
 \end{equation}
-Where $h$ is the height of the patch, $w$ is the width of the patch and $C$ is the feature size. While the improved computational complexityof W-MSA is linear to the number of patches as shown in the equation below:
+Where $h$ is the height of the patch, $w$ is the width of the patch and $C$ is the feature size. While the improved computational complexity of W-MSA is linear to the number of patches as shown in the equation below:
 \begin{equation}
     \Omega (\mathbf{W-MSA}) = 4hwC^2 + 2M^2hwC
 \end{equation}
@@ -395,7 +391,7 @@ The main issue with this approach is the number of local windows increased from 
 \label{fig:swin cyclic}
 \end{figure}
 
-SW-MSA successfully introduced connections between windows while masking prevents the attention computation from processing across the image boundary. Figure \ref{fig:2swins} show two consecutiveSwin Transformer blocks with each one having a different partitioning scheme.
+SW-MSA successfully introduced connections between windows while masking prevents the attention computation from processing across the image boundary. Figure \ref{fig:2swins} show two consecutive Swin Transformer blocks with each one having a different partitioning scheme.
 \FloatBarrier
 \begin{figure}[ht]
 \includegraphics[width=6.5cm, height=7cm]{images/swin-architecture.jpg}
@@ -409,7 +405,7 @@ The self-attention score using SW-MSA can be calculated as follows:
     Attention(Q,K,V) = softmax(\frac{QK^T}{\sqrt{d}+B})V
 \end{equation}
 
-Swin Transformer V2 \cite{swin-v2} was introsuced in 2021 and it is an improved version of Swin Transformer to increase scability, accuracy and stablity during training. As shown in figure \ref{fig:swin v1 vs v2}, the Layer Normalization block is moved from front to back of the residual unit and a new scaled cosine self-attention unit is used inplace of the old matrix multiplication based self-attention. The new self-attention score can be calculated as:
+Swin Transformer V2 \cite{swin-v2} was introduced in 2021 and it is an improved version of Swin Transformer to increase scalability, accuracy and stability during training. As shown in figure \ref{fig:swin v1 vs v2}, the Layer Normalization block is moved from front to back of the residual unit and a new scaled cosine self-attention unit is used in place of the old matrix multiplication based self-attention. The new self-attention score can be calculated as:
 \begin{equation}
     Sim(\mathbf{q}_i,\mathbf{k}_j) = \frac{cos(\mathbf{q}_i,\mathbf{k}_j)}{\tau} + B_{ij}
 \end{equation}
@@ -426,7 +422,7 @@ Where $B_{ij}$ is the relative position bias between pixel i and j; $\tau$ is a 
 
 \subsection{UNetFormer}
 %%unetformer
-UNetFormer \cite{unetformer} proposes a UNet-like Transformer for semantic segmentation task trained using the UAVid, Vaihingen, Potsdam and LoveDA datasets.UNetFormer has the same encoder-decoder framework as the other U-Net variants. Referring to figure \ref{fig:unetformer} UNetFormer uses pretrained ResNet18 as its encoder and a Transformer with an added global-local Transformer block (GLTB) that are used as its decoder. 
+UNetFormer \cite{unetformer} proposes a UNet-like Transformer for semantic segmentation task trained using the UAVid, Vaihingen, Potsdam and LoveDA datasets.UNetFormer has the same encoder-decoder framework as the other U-Net variants. Referring to figure \ref{fig:unetformer} UNetFormer uses pre-trained ResNet18 as its encoder and a Transformer with an added global-local Transformer block (GLTB) that are used as its decoder. 
 
 ResNet18 consists of four stages and each stage will down-sample the feature map with a scale factor of 2. The feature maps generated by each stage are fused with the corresponding feature maps of the decoder using a 1x1 convolution with the channel dimension of 64. The semantic features produced by the ResNet18 are aggregated with the features generated by the GLTB of the decoder using a weighted sum operation. 
 
@@ -444,7 +440,7 @@ ResNet18 consists of four stages and each stage will down-sample the feature map
 \label{fig:gltb}
 \end{figure}
 
-The GLTB is made up of the global–local attention, multilayer perceptron, two batch normalization layers and two additional operations. The global–local attention has two  branches, the local branch and the global branch as shown in figure \ref{fig:unetformer-besar}. The local branch uses two parallel convolutional layers with kernel sizes of 3 and 1 to extract the local context. Two batch normalization operations are employed before the final sum operation.As illustrated in figure \ref{fig:unetformer-besar} the global btanch uses the same window-based multi-head self-attention in Swin Transformer to capture the global context.
+The GLTB is made up of the global–local attention, multi layer perceptron, two batch normalization layers and two additional operations. The global–local attention has two  branches, the local branch and the global branch as shown in figure \ref{fig:unetformer-besar}. The local branch uses two parallel convolutional layers with kernel sizes of 3 and 1 to extract the local context. Two batch normalization operations are employed before the final sum operation.As illustrated in figure \ref{fig:unetformer-besar} the global branch uses the same window-based multi-head self-attention in Swin Transformer to capture the global context.
 \FloatBarrier
 \begin{figure}[ht]
 \includegraphics[width=13.5cm, height=18cm]{images/unetformer besar.jpg}
@@ -467,7 +463,7 @@ The Swin Transformer uses a shifting windows mechanism to generate the relations
 \end{equation}
 
 \FloatBarrier
-Where w is the window size and D denotes the self-attention computation. Similarly, the vertical relationship between $Win_1$ and $Win_3$ can be established in a similar way, $Win_1 = V(Win_3)$ and for $Win_4$ the realtionship is $Win_1 = V(H(Win_4)) + H(V(Win_4))$. 
+Where w is the window size and D denotes the self-attention computation. Similarly, the vertical relationship between $Win_1$ and $Win_3$ can be established in a similar way, $Win_1 = V(Win_3)$ and for $Win_4$ the relationship is $Win_1 = V(H(Win_4)) + H(V(Win_4))$. 
 
 \FloatBarrier
 
@@ -480,11 +476,11 @@ Where w is the window size and D denotes the self-attention computation. Similar
 
 \FloatBarrier
 
-Finally, UNetFormer uses a Feature Refinement Head (FRH) just before the output is produced. The reason why FRH is needed is because while the ResNet encoder provides rich spatial details of satellite images, it lacks semantic content, on the other hand the deep GLTB provides precise semantic information, but with a coarse spatial resolution. FRH shrinks the semantic gap between the two features for improved accuracy. FRH received the fused feature as shown in \ref{fig:unetformer} as its input. Then, two path are constructed to strengthen the channel-wise and spatial-wise feature representation as shown in figure \ref{fig:frh}. The first path is called the channel path while the second path is called the spatial path. The channel path employs a global average pooling layer to generate a channel-wise attentional map $\textbf{C} \in \mathbb{R}^{1\times 1 \times c}$ , where c is the channel dimension. The reduce \& expand operation contains two 1 x 1 convolutional layers, which first reduces the channel dimension c by a factor of 4 and then expands it to the original dimension. The spatial path utilizes a depth-wise convolution to produce a spatial-wise attentional map $\textbf{S} \in \mathbb{R}^{h\times w \times 1}$  , where h and w are the height and width of the feature map. The features generated by the two paths are fused before a 1x1 convolutional layer and an upsampling operation are applied as post processing.
+Finally, UNetFormer uses a Feature Refinement Head (FRH) just before the output is produced. The reason why FRH is needed is because while the ResNet encoder provides rich spatial details of satellite images, it lacks semantic content, on the other hand the deep GLTB provides precise semantic information, but with a coarse spatial resolution. FRH shrinks the semantic gap between the two features for improved accuracy. FRH received the fused feature as shown in \ref{fig:unetformer} as its input. Then, two path are constructed to strengthen the channel-wise and spatial-wise feature representation as shown in figure \ref{fig:frh}. The first path is called the channel path while the second path is called the spatial path. The channel path employs a global average pooling layer to generate a channel-wise attention map $\textbf{C} \in \mathbb{R}^{1\times 1 \times c}$ , where c is the channel dimension. The reduce \& expand operation contains two 1 x 1 convolutional layers, which first reduces the channel dimension c by a factor of 4 and then expands it to the original dimension. The spatial path utilizes a depth-wise convolution to produce a spatial-wise attention map $\textbf{S} \in \mathbb{R}^{h\times w \times 1}$  , where h and w are the height and width of the feature map. The features generated by the two paths are fused before a 1x1 convolutional layer and an up sampling operation are applied as post processing.
 
 %%%LANET%%%%%%
 \subsection{LANet}
-Local Attention Network (LANet) \cite{lanet}introduced two additional modules to improve semantic segmentation of satellite images. The first module is the Patch Attention Module (PAM) to enhance the embedding of local context information. The second module is the Attention Embedding Module (AEM) to improve the use of spatial information. Referring to figure \ref{fig:lanet} The high-level features produced by late layers of CNNs will pass through a PAM to enhance its feature, while the low-level features produced by early layers of a CNN are first enhanced by a PAM, before being embedded with semantic information from high-level features through AEM. The final ouput is the fusion of the outputs from the top and bottom channels. 
+Local Attention Network (LANet) \cite{lanet}introduced two additional modules to improve semantic segmentation of satellite images. The first module is the Patch Attention Module (PAM) to enhance the embedding of local context information. The second module is the Attention Embedding Module (AEM) to improve the use of spatial information. Referring to figure \ref{fig:lanet} The high-level features produced by late layers of CNNs will pass through a PAM to enhance its feature, while the low-level features produced by early layers of a CNN are first enhanced by a PAM, before being embedded with semantic information from high-level features through AEM. The final output is the fusion of the outputs from the top and bottom channels. 
 
 \FloatBarrier
 \begin{figure}[ht]
@@ -502,7 +498,7 @@ Referring to figure \ref{fig:pam}, PAM will first generate a local descriptor fo
     z_c = \frac{1}{h_p w_p} \sum_{i=1}^{h_p} \sum_{j=1}^{w_p} x_c(i,j)
 \end{equation}
 
-where $h_p$ and $w_p$ is the horizontal and vertical size of the patch and $x_c$ is the pixel value at the $c$ th channel. In this way, a c-channel vector $z_p$ will be generated, which contains the statistics describing the patch p. Then, they apply convolutional layer to learn an attention vector $a_p \in \mathbb{R}^{c \times h_p \times w_p}$. The entire gating operation to generate attention maps includes a 1 x 1 dimension-reduction convolution, 1×1 dimension-increasing convolution that recovers the feature dimension back to $c$ and an upsampling operation.
+where $h_p$ and $w_p$ is the horizontal and vertical size of the patch and $x_c$ is the pixel value at the $cth$ channel. In this way, a c-channel vector $z_p$ will be generated, which contains the statistics describing the patch p. Then, they apply convolutional layer to learn an attention vector $a_p \in \mathbb{R}^{c \times h_p \times w_p}$. The entire gating operation to generate attention maps includes a 1 x 1 dimension-reduction convolution, 1×1 dimension-increasing convolution that recovers the feature dimension back to $c$ and an up sampling operation.
 \begin{figure}[ht]
 \includegraphics[width=9.5cm, height=4.5cm]{images/pam.png}
 \centering
@@ -511,7 +507,7 @@ where $h_p$ and $w_p$ is the horizontal and vertical size of the patch and $x_c$
 \end{figure}
 \FloatBarrier
 
-In most networks, the most frequently used way of employing low-level features is to concatenate them with high-level features, which brings only slight improvement in performance. The authors proposed AEM to bridge the gap between high-level and low-level features without sacrificing the spatial details of the latter. Figure \ref{fig:aem} shows the implementation of AEM. First, they generate a high-level feature descriptor map, $z_c$ and low-level descriptor map , $x_c$ usinging the same formula in PAM. Then, an attention map, $a_c$ is generated using average pooling, 1 x 1 convolution and upsampling. Finally $a_c$ will be added to $x_c$ to generate an improved low-level descriptor.  
+In most networks, the most frequently used way of employing low-level features is to concatenate them with high-level features, which brings only slight improvement in performance. The authors proposed AEM to bridge the gap between high-level and low-level features without sacrificing the spatial details of the latter. Figure \ref{fig:aem} shows the implementation of AEM. First, they generate a high-level feature descriptor map, $z_c$ and low-level descriptor map , $x_c$ using the same formula in PAM. Then, an attention map, $a_c$ is generated using average pooling, 1 x 1 convolution and up sampling. Finally $a_c$ will be added to $x_c$ to generate an improved low-level descriptor.  
 \begin{figure}[ht]
 \includegraphics[width=9.5cm, height=4.5cm]{images/aem.png}
 \centering
@@ -533,9 +529,9 @@ A novel semantic segmentation scheme of densely connected (DC-Swin) \cite{a-nove
 \label{fig:dc}
 \end{figure}
 
-Referring to figure \ref{fig:dc}(a), the Swin Transformer split the input RGB image into nonoverlapping patches as "tokens" using a patch partition module. This tokens are then fed into the multistage feature transformation. In stage 1, a linear embedding layer is deployed to project features to an arbitrary dimension $C$. Next, a pair of Swin Transformer as shown in figure \ref{fig:dc}(b) are utilized to extract semantic features. In stages 2 to 4, the number of tokens is gradually reduced by patch merging layers along with the increasing depth of the network to produce a hierarchical representation. The outputs of the four stages are processed by a standard 1 $\time$ 1 convolution to generate four hierarchical Swin Transformer features. By adjusting the hyperparameters of tge Swin Transformer, they can construct backbones with different complexities.
+Referring to figure \ref{fig:dc}(a), the Swin Transformer split the input RGB image into non-overlapping patches as "tokens" using a patch partition module. This tokens are then fed into the multistage feature transformation. In stage 1, a linear embedding layer is deployed to project features to an arbitrary dimension $C$. Next, a pair of Swin Transformer as shown in figure \ref{fig:dc}(b) are utilized to extract semantic features. In stages 2 to 4, the number of tokens is gradually reduced by patch merging layers along with the increasing depth of the network to produce a hierarchical representation. The outputs of the four stages are processed by a standard 1x1 convolution to generate four hierarchical Swin Transformer features. By adjusting the hyperparameters of tge Swin Transformer, they can construct backbones with different complexities.
 
-DFCAM has two important modules namely the Shared Spatial Attention (SSA) and a Shared Channel Attention (SCA) to enhance the spatial-wise and channel-wise relationship. Then, multi-level features are further integrated using the Downsample Connection and the Largefield Upsample Connection for improving m lti-scale. According to figure \ref{fig:dc} DFCAM connects the four hierarchical features with cross-scale connections and attention blocks to generate four aggregation features: AF1, AF2, AF3, and AF4.  
+DFCAM has two important modules namely the Shared Spatial Attention (SSA) and a Shared Channel Attention (SCA) to enhance the spatial-wise and channel-wise relationship. Then, multi-level features are further integrated using the Downsample Connection and the Largefield Upsample Connection for improving multi-scale. According to figure \ref{fig:dc} DFCAM connects the four hierarchical features with cross-scale connections and attention blocks to generate four aggregation features: AF1, AF2, AF3, and AF4.  
 
 The Downsample connection which is the green line in figure \ref{fig:dc} connects the low-level and high-level transformer features for fusion and it can be defined as follow:
 \begin{equation}
@@ -550,9 +546,9 @@ context effectively and can be mathematically expressed as:
     LU^n_m(\mathbf{X}) = f^{12}_\varphi(f_\sigma(f^6_\varphi(\mathbf{X})))
 \end{equation}
 
-Where $f^{12}_\varphi$ is a composite function that contains a standard 1x1 convolution, a dilated convolution with a dilated rate of 12, and a standard transpose convolution; $f^{6}_\varphidilated$ is similar but with a dilated rate of 6; $m $and $n$ are the number of the input channel and output channel.
+Where $f^{12}_\varphi$ is a composite function that contains a standard 1x1 convolution, a dilated convolution with a dilated rate of 12, and a standard transpose convolution; $f^{6}_\varphi$ is similar but with a dilated rate of 6; $m $and $n$ are the number of the input channel and output channel.
 
-SSA is used to model the long range dependencies and it is defined as: jangan fail
+SSA is used to model the long range dependencies and it is defined as: 
 \begin{equation}
     SSA(\mathbf{X}) = \frac{\sum_n V(\mathbf{X}_{c,n})+\frac{Q(\mathbf{X})}{|||Q(\mathbf{X})||_2} ((\frac{K(\mathbf{X})}{||K(\mathbf{X}))||_2})^T V(\mathbf{X})}
     {N + \frac{Q(\mathbf{X})}{||Q(\mathbf{X})||_2} \sum_n(\frac{K(\mathbf{X})}{||K(\mathbf{X}))||_2})^T }
@@ -584,10 +580,10 @@ Each of the aggregation features can be mathematically expressed as follows:
 \begin{equation}
     \mathbf{AF_1} = \mathbf{ST_1} + U(\mathbf{AF_2}) + LU^{96}_{384}(\mathbf{AF_3})
 \end{equation}
-where $U$ is a bilinear interpolation upsample operation with a scale factor of 2; $\mathbf{ST_1}, \mathbf{ST_2}, \mathbf{ST_3} and \mathbf{ST_4}$ are the Swin Transformer features from its respective block.
+where $U$ is a bi-linear interpolation up sample operation with a scale factor of 2; $\mathbf{ST_1}, \mathbf{ST_2}, \mathbf{ST_3} and \mathbf{ST_4}$ are the Swin Transformer features from its respective block.
 %%%%%%%%%% BANET
 \subsection{BANet}
-The architecture of Bilateral Awareness Network (BANet) is shown in figure \ref{banet} and it is madeup of two paths: the dependency path and the texture path. The texture path is designed to extract textural feature and the dependency path is for capturing long range dependencies.
+The architecture of Bilateral Awareness Network (BANet) is shown in figure \ref{banet} and it is made up of two paths: the dependency path and the texture path. The texture path is designed to extract textural feature and the dependency path is for capturing long range dependencies.
 
 \FloatBarrier
 \begin{figure}[ht]
@@ -597,7 +593,7 @@ The architecture of Bilateral Awareness Network (BANet) is shown in figure \ref{
 \label{fig:banet}
 \end{figure}
 
-The dependency path is made up of a stem block and four Transformer stages to extract where each stage consists of two efficient transformer blocks (ETB). Stage 2,3 and 4 has a patch embedding (PE) operation. The dependency pathwill generate two long range dependent features namely the LDF3 and LDF4. The ETB is made up of ResT-Lite \cite{restlite} pretrained on ImageNet. ETB as illustrated in figure \ref{fig:etb} uses efficient multihead self-attention (EMSA) instead of the usual multi-headed self attention.
+The dependency path is made up of a stem block and four Transformer stages to extract where each stage consists of two efficient transformer blocks (ETB). Stage 2,3 and 4 has a patch embedding (PE) operation. The dependency path will generate two long range dependent features namely the LDF3 and LDF4. The ETB is made up of ResT-Lite \cite{restlite} pre-trained on ImageNet. ETB as illustrated in figure \ref{fig:etb} uses efficient multi-head self-attention (EMSA) instead of the usual multi-headed self attention.
 
 \FloatBarrier
 \begin{figure}[ht]
@@ -613,7 +609,7 @@ The self-attention score from EMSA can be calculated as follows:
 \end{equation}
 where IN is the instance normalization function and LP stands for linear projection.
 
-The texture path has four convolution layers and each convolutional layer is equipped with batch normalization and ReLU activation function. The downsampling factor is set to 8. The output for the texture path can be expressed as:
+The texture path has four convolution layers and each convolutional layer is equipped with batch normalization and ReLU activation function. The down sampling factor is set to 8. The output for the texture path can be expressed as:
 \begin{equation}
     TF(\mathbf{X}) = T_4(T_3(T_2(T_1(\mathbf{X}))))
 \end{equation}
@@ -622,7 +618,7 @@ normalization operation, and a ReLU activation function. The convolutional layer
 kernel size of 7 and a stride of 2, which expands the channel dimension from 3 to 64. For
 $T_2$ and $T_3$, the kernel size and stride are 3 and 2, respectively. The channel dimension is
 kept as 64. Lastly for $T_4$, the convolutional layer is a standard 1x1 convolution with a stride of 1, expanding the channel dimension from 64 to 128. Thus, the output textural feature is
-downscaled 8 times and has a channel dimension of 128.
+down-scaled 8 times and has a channel dimension of 128.
 
 The last module in BANet is the Feature Aggregation Module (FAM) and it is designed to leverage the benefits of the dependent features and texture features for powerful feature representation. FAM is illustrated in figure \ref{fig:fam}. The input features for the FAM include the LDF3, LDF4 and TF. To fuse those features, they first employ an attentional embedding module (AEM) to merge LDF3 and LDF4. Then, the merged feature is upsampled to concatenate with the TF to produce the aggregated feature. Finally, the linear attention module is deployed to reduce the fitting residual of the aggregated feature.
 
@@ -649,7 +645,7 @@ Adaptive Enhanced Swin Transformer with U-Net (AESwin-UNet) \cite{unet-transform
 Enhanced Swin Transformer is a Swin Transformer  with enhanced multi-head self-attention (EMHSA) and deformable adaptive patch merging layer (DeforAPM). The EMHSA calculate  the attention score by fusing the low-level features and the global channel context. The enhanced attention can be formally defined as:
 
 \begin{equation}
-    Attention(Q,K,V) = Softmax(\fraction{att(QK^T)}{\sqrt{d_k}}+B)V
+    Attention(Q,K,V) = Softmax(\frac{att(QK^{T})}{\sqrt{d_k}}+B)V
 \end{equation}
 
 \subsection{Summary of Semantic Segmentation Using Transformer}
@@ -732,7 +728,7 @@ The three tables below contain the F1-score, mIou score and accuracy score of ea
     
     There are two aspects that gives a vision transformer general modelling capabilities. The first one being performing a task using a transformer can be interpreted as working on a fully connected graph. Any concept, can be represented by the nodes in a graph, and the relationship between concepts are represented by the graph edges.
 
-    Every task in computer vision deals with processing two basic granular elements: pixels and objects. Thus, there are three type of relationship that can be found: pixel-to-pixel, object-to-object and pixel-to-object. The transformer's attention mechanism allows researchers to include all 3 types of relationships in one network. For examples, networks such as DETR \cite{detr}, LearnRegionFeat \cite{learnregionfeat} and RelationNet++ \cite{regionnet++} model the relationship between object and pixel to achieve SOTA performance in semantic segmentation task.  
+    Every task in computer vision deals with processing two basic granular elements: pixels and objects. Thus, there are three type of relationship that can be found: pixel-to-pixel, object-to-object and pixel-to-object. The transformer's attention mechanism allows researchers to include all 3 types of relationships in one network. For examples, networks such as DETR \cite{detr}, LearnRegionFeat \cite{learnregionfeat} and RelationNet++ \cite{regionnet++} model the relationship between object and pixel to achieve state of the art performance in semantic segmentation task.  
 
     \item \textit{\textbf{Attention Mechanism Complements Convolution}}
 
@@ -759,14 +755,14 @@ The three tables below contain the F1-score, mIou score and accuracy score of ea
 
 Pruning a deep learning model is a technique to reduce the number of its parameters by removing redundant values in order to reduce storage, memory, battery, and hardware consumption without sacrificing its performance. This would allow us to deploy the model and guarantee that it would run smoothly on every device. This section would discuss several techniques to prune a Vision Transformer.
 
-Pruning can be divided into two schemes, structured pruning and unstructured pruning. Structural pruning alters the structure of the network by physically removing grouped parameters, while unstructural pruning remove the redundant weights after the training is finished without any modification to the network \cite{depgraph}. Unstructured pruning are easier to deploy as it does not relies on specific techniques, thereby making it more popular.
+Pruning can be divided into two schemes, structured pruning and unstructured pruning. Structural pruning alters the structure of the network by physically removing grouped parameters, while unstructured pruning remove the redundant weights after the training is finished without any modification to the network \cite{depgraph}. Unstructured pruning are easier to deploy as it does not relies on specific techniques, thereby making it more popular.
 
-An example of unstructured pruning is to set a minimum threshold of weight at the end of a layer and any values that is smaller than that threshold will be change to zero. This method would be easily done using torch.nn.utils.prune provided by Pytorch however it greatly decrease the performance of the model. We will need a more comprehensive and systematic approach to prune our Vision Transformer.
+An example of unstructured pruning is to set a minimum threshold of weight at the end of a layer and any values that is smaller than that threshold will be change to zero. This method would be easily done using torch.nn.utils.prune package provided by Pytorch however it greatly decrease the performance of the model. We will need a more comprehensive and systematic approach to prune our Vision Transformer.
 
 Structured pruning is a challenging task deep neural networks are made up of a large number of basic modules like convolution, normalization, or attention, that are intrinsically connected. As an example, if we seek to remove only one layer from a Transformer, we have to inevitably take care of its inter-
 dependencies to all layers simultaneously, otherwise we will end up with a broken network.
 
-The first comprehensive method to prune a Vision Transformer is to learn its associated importance score before pruning its parameters \cite{pruning-vit}. For the features $x \in \mathbb{R}^{n \times d}$ , where $n$ is the number of features that we want to prune and $d$ is the dimension of each feature, the proposed method will preserve the generated important features and remove the useless ones. Suppose the optimal importance score is $a^* \in \mathbb{R}^d$. This method is applied on DeiT-base \cite{deit} trained on ImageNet-1k and ImageNet 100. 
+The first comprehensive method to prune a Vision Transformer is to learn its associated importance score before pruning its parameters \cite{pruning-vit}. For the features $x \in \mathbb{R}^{n \times d}$ , where $n$ is the number of features that we want to prune and $d$ is the dimension of each feature, the proposed method will preserve the generated important features and remove the useless ones. Suppose the optimal importance score is $a^* \in \mathbb{R}^d$. This method is applied on DeiT-base \cite{deit} trained on ImageNet-1k and ImageNet 100. The result of pruning Vision Transformer using the methods proposed by \citeA{pruning-vit} is shown in Table \ref{tab:pruning}.
 
 \FloatBarrier
 \begin{table}[]
@@ -780,14 +776,14 @@ ImageNet-1k      & Deit           & 0                     & 86.4                
 ImageNet-1k      & Deit           & 0.2                   & 67.3                                     & 13.8                                    & 81.3                                   \\ \hline
 ImageNet-1k      & Deit           & 0.4                   & 48.0                                     & 10.0                                    & 80.7                                   \\ \hline
 \end{tabular}
-\caption{The result of Pruning Vision Transformer \cite{pruning-vit}.}
+\caption{The Result of Pruning Vision Transformer.}
 \label{tab:pruning}
 \end{table}
 \FloatBarrier
 
-\citeA{pruning-block} identified that there are three ways to compress a model. The first method is distillation which utilize targeted distillation to produce smaller models with a dense structure that is fast on standard hardware. Distillation has been proven succesful in language models such as DistilBERT \cite{distilbert} and TinyBERT \cite{tinybert} which are all compressed versions of BERT \cite{bert}. The second method is pruning and third method is a combination of pruning and distillation. Distillation requires a very tedious engineering process and it is very hard to achieve.
+\citeA{pruning-block} identified that there are three ways to compress a model. The first method is distillation which utilize targeted distillation to produce smaller models with a dense structure that is fast on standard hardware. Distillation has been proven successful in language models such as DistilBERT \cite{distilbert} and TinyBERT \cite{tinybert} which are all compressed versions of BERT \cite{bert}. The second method is pruning and third method is a combination of pruning and distillation. Distillation requires a very tedious engineering process and it is very hard to achieve.
 
-\citeA{pruning-block} also categorized pruning into three methods. The first one being the score-based pruning methods \cite{score-pruning} which modify the model by introducing score parameters \textbf{S} for each parameter \textbf{i} and replace the original parameter matrices with a masked version. The simplest one would be to zero-out the parameters with the lowest value as discussed earlier. The second pruning method is movement pruning which ncourages the model to fine-tune the parameters while lowering the scores of unimportant parameters and thus encouraging more sparsity. 
+\citeA{pruning-block} also categorized pruning into three methods. The first one being the score-based pruning methods \cite{score-pruning} which modify the model by introducing score parameters \textbf{S} for each parameter \textbf{i} and replace the original parameter matrices with a masked version. The simplest one would be to zero-out the parameters with the lowest value as discussed earlier. The second pruning method is movement pruning which encourages the model to fine-tune the parameters while lowering the scores of unimportant parameters and thus encouraging more sparsity. 
 
 The third pruning method is block movement pruning \cite{pruning-block} which is a hybrid of movement and block pruning. They proposed to partition each matrix in the Transformer into multiple fixed-sized blocks. Every block acts as an individual group in the regularization with a shared score parameter and a different mask would be applied to each block. This method has not been used alongside a Vision Transformer but they did use it to train BERT \cite{bert}, an encoder-only Transformer language model with 110M parameters for question answering and sentence classification. Overall, they managed to reduce the number of parameters by a factor of 5.91 and trained it $2.24$ times faster with only a 1.99\% drop in F1 score. The full result of using movement block pruning can be seen in table \ref{tab:block-movement}.
 \FloatBarrier
@@ -807,3 +803,13 @@ The third pruning method is block movement pruning \cite{pruning-block} which is
 \label{tab:block-movement}
 \end{table}
 \FloatBarrier
+
+
+
+
+
+
+
+
+
+

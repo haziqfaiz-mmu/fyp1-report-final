@@ -34,7 +34,7 @@ LoveDA dataset was introduced in Chapter 2 but here we are going to give a more 
 \label{tab:class-loveda}
 \end{table}
 
-Each pixel in the dataset is labelled as it is made specifically for sematic segmentation task. The images in LoveDA dataset are separated into two groups; the rural images and the urban images. Each of the group is already splitted into a training set, a validation set and a testing set. To be specific, the training set is composed of 2522 images , the validation set is composed of 1669 images  and the 1796 images is used for testing.  The structure of the dataset is shown in figure \ref{fig:loveda-structure} .
+Each pixel in the dataset is labelled as it is made specifically for semantic segmentation task. The images in LoveDA dataset are separated into two groups; the rural images and the urban images. Each of the group is already split into a training set, a validation set and a testing set. To be specific, the training set is composed of 2522 images , the validation set is composed of 1669 images  and the 1796 images is used for testing.  The structure of the dataset is shown in figure \ref{fig:loveda-structure} .
 
 \FloatBarrier
 \begin{figure}[!h]
@@ -44,7 +44,7 @@ Each pixel in the dataset is labelled as it is made specifically for sematic seg
 \label{fig:loveda-structure}
 \end{figure}
 
-Figure \ref{fig:boxplot-rural-train}, \ref{fig:boxplot-urban-train}, \ref{fig:boxplot-rural-test} and \ref{fig:boxplot-urban-test} show the boxplots of the classes in the training and test set while figure \ref{fig:barplot-rural-train}, \ref{fig:barplot-urban-train}, \ref{fig:barplot-rural-test} and \ref{fig:barplot-urban-test} show the distribution of the same datasets. We observed that there is definitely class imbalanced in all four sets of the data. Rural areas have more agriculture and forest as expected. Urban area have more roads and buildings as the buildings in urban area are bigger and situated closely together while the roads in urban area are generally wider than the ones in rural area. Water are often exist in the form of large-scale rivers, drains or lakes in the urban scenes, while small ponds and ditches are more common in the rural scenes. In urban area, the agricultural part is often found in the gaps between the buildings while the rural area have a more continuous and large agricultural lands.
+Figure \ref{fig:boxplot-rural-train}, \ref{fig:boxplot-urban-train}, \ref{fig:boxplot-rural-test} and \ref{fig:boxplot-urban-test} show the box plots of the classes in the training and test set while figure \ref{fig:barplot-rural-train}, \ref{fig:barplot-urban-train}, \ref{fig:barplot-rural-test} and \ref{fig:barplot-urban-test} show the distribution of the same datasets. We observed that there is definitely class imbalanced in all four sets of the data. Rural areas have more agriculture and forest as expected. Urban area have more roads and buildings as the buildings in urban area are bigger and situated closely together while the roads in urban area are generally wider than the ones in rural area. Water are often exist in the form of large-scale rivers, drains or lakes in the urban scenes, while small ponds and ditches are more common in the rural scenes. In urban area, the agricultural part is often found in the gaps between the buildings while the rural area have a more continuous and large agricultural lands.
 
 There are two concerning observations from the graphs. The first one being the amount of agriculture in the urban test dataset is larger than expected. the second concern being both rural and urban areas have a very large amount of background area and the background have very different meaning in these two areas. The background in urban area are usually the sidewalks, parking lots and parks while the background in rural area are usually the unused gaps between agricultural area. 
 
@@ -52,28 +52,28 @@ There are two concerning observations from the graphs. The first one being the a
 \begin{figure}[!h]
 \includegraphics[width=15.0cm, height=8.5cm]{images/rural train boxplot.png}
 \centering
-\caption{Boxplot of the Pixel Counts of the Rural Train Dataset}
+\caption{Box plot of the Pixel Counts of the Rural Train Dataset}
 \label{fig:boxplot-rural-train}
 \end{figure}
 
 \begin{figure}[!h]
 \includegraphics[width=15.0cm, height=8.5cm]{images/rural train barplot.png}
 \centering
-\caption{Barplot of the Pixel Counts of the Rural Train Dataset}
+\caption{Bar plot of the Pixel Counts of the Rural Train Dataset}
 \label{fig:barplot-rural-train}
 \end{figure}
 
 \begin{figure}[!h]
 \includegraphics[width=15.0cm, height=8.5cm]{images/urban train boxplot.png}
 \centering
-\caption{Boxplot of the Pixel Counts of the Urban Train Dataset}
+\caption{Box plot of the Pixel Counts of the Urban Train Dataset}
 \label{fig:boxplot-urban-train}
 \end{figure}
 
 \begin{figure}[!h]
 \includegraphics[width=15.0cm, height=8.5cm]{images/urban train barplot.png}
 \centering
-\caption{Barplot of the Pixel Counts of the Rural Train Dataset}
+\caption{Bar plot of the Pixel Counts of the Rural Train Dataset}
 \label{fig:barplot-urban-train}
 \end{figure}
 
@@ -81,14 +81,14 @@ There are two concerning observations from the graphs. The first one being the a
 \begin{figure}[!h]
 \includegraphics[width=15.0cm, height=8.5cm]{images/rural test boxplot.png}
 \centering
-\caption{Boxplot of the Pixel Counts of the Rural Test Dataset}
+\caption{Box plot of the Pixel Counts of the Rural Test Dataset}
 \label{fig:boxplot-rural-test}
 \end{figure}
 
 \begin{figure}[!h]
 \includegraphics[width=15.0cm, height=8.5cm]{images/rural test barplot.png}
 \centering
-\caption{Barplot of the Pixel Counts of the Rural Test Dataset}
+\caption{Bar plot of the Pixel Counts of the Rural Test Dataset}
 \label{fig:barplot-rural-test}
 \end{figure}
 
@@ -96,14 +96,14 @@ There are two concerning observations from the graphs. The first one being the a
 \begin{figure}[!h]
 \includegraphics[width=15.0cm, height=8.5cm]{images/urban test boxplot.png}
 \centering
-\caption{Boxplot of the Pixel Counts of the Urban Test Dataset}
+\caption{Box plot of the Pixel Counts of the Urban Test Dataset}
 \label{fig:boxplot-urban-test}
 \end{figure}
 
 \begin{figure}[!h]
 \includegraphics[width=15.0cm, height=8.5cm]{images/urban test barplot.png}
 \centering
-\caption{Barplot of the Pixel Counts of the Urban Test Dataset}
+\caption{Bar plot of the Pixel Counts of the Urban Test Dataset}
 \label{fig:barplot-urban-test}
 \end{figure}
 
@@ -123,7 +123,7 @@ As shown in figure \ref{fig:data-uti}, the dataset is split into urban and rural
 \end{figure}
 \FloatBarrier
 
-Before training starts, the training images and mask would undergo several transformaation. First, they would be cropped into smaller images of 512x512 pixels as required by UNetFormer. Then, those images would be randomly flipped, horizontally and vertically before randomly increasing its brightness.
+Before training starts, the training images and mask would undergo several transformation. First, they would be cropped into smaller images of 512x512 pixels as required by UNetFormer. Then, those images would be randomly flipped, horizontally and vertically before randomly increasing its brightness.
 
 
 
@@ -153,7 +153,7 @@ The model is trained on a computer with Nvidia GTX 2080 GPU. The semantic segmen
 
 masukkan transfer learning dengan pre-trained weights.
 
-On the other hand, we get the baseline result by training the same a U-Net model with ResNet18 backbone using the same dataset. The code for the model is written in PyTorch and is publically available at the author's Github page \href{https://github.com/WangLibo1995/GeoSeg}. The model can be summarised in Figure \ref{fig:initial-model}.
+On the other hand, we get the baseline result by training the same a U-Net model with ResNet18 backbone using the same dataset. The code for the model is written in PyTorch and is publicly available at the author's Github page \href{https://github.com/WangLibo1995/GeoSeg}. The model can be summarised in Figure \ref{fig:initial-model}.
 
 \begin{figure}[!h]
 \includegraphics[width=13.0cm, height=8.5cm]{images/initial model.png}
@@ -161,7 +161,7 @@ On the other hand, we get the baseline result by training the same a U-Net model
 \label{fig:initial-model}
 \end{figure}
 
-Based on Figure \ref{fig:initial-model}, the training image are augmented as described in the previous section. Then, both the training images and masks would be cropped to reduce its size. All the components inside the red line belongs to UNetFormer. Patch embedding would be applied to the cropped images before it is fed into the encoder that is made up of four Swin Transformer. The encoder is connected to the decoder through a series of skip connections. The output from the decoder will be used to calculate the losses and to update the weights. This process is repeated as many times as the desired epoch value. Lastly, after it finishes all epoch, the output will be a collection of cropped black and white images. The mask produced will have a pixel values of 0-7 and this makes it impossible to assess its quality through visual inspection. We converted the 0-7 values to RGB values to make it eassier to assess. Table \ref{tab:hyperparam-value} shows the values of hyperparameters used in the model.
+Based on Figure \ref{fig:initial-model}, the training image are augmented as described in the previous section. Then, both the training images and masks would be cropped to reduce its size. All the components inside the red line belongs to UNetFormer. Patch embedding would be applied to the cropped images before it is fed into the encoder that is made up of four Swin Transformer. The encoder is connected to the decoder through a series of skip connections. The output from the decoder will be used to calculate the losses and to update the weights. This process is repeated as many times as the desired epoch value. Lastly, after it finishes all epoch, the output will be a collection of cropped black and white images. The mask produced will have a pixel values of 0-7 and this makes it impossible to assess its quality through visual inspection. We converted the 0-7 values to RGB values to make it easier to assess. Table \ref{tab:hyperparam-value} shows the values of hyperparameters used in the model.
 
 \begin{table}[!h]
 \centering
@@ -180,7 +180,7 @@ Based on Figure \ref{fig:initial-model}, the training image are augmented as des
 
 \section{Model Evaluation}
 
-The most common evaluation metric used by semantic segmentation is the mean Intersection over Union (mIou). The mIoU is also known as the Jaccard Index or the Jaccard similarity coefficeint. The IoU for a single class is defined as:
+The most common evaluation metric used by semantic segmentation is the mean Intersection over Union (mIoU). The mIoU is also known as the Jaccard Index or the Jaccard similarity coefficient. The IoU for a single class is defined as:
 \begin{equation}
     IoU = \frac{True Positives}{True Positives + False Positives + False Negatives}
 \end{equation}
@@ -210,7 +210,7 @@ Accuracy is the ratio of correct predictions and can be calculated as:
 This section would explain the methods that can be taken to refine the model. During FYP 1, we proposed two methods to refine the model. The first method is hyperparameter tuning and the second one is pruning the parameters. 
 \subsection{Hyperparameter Tuning}
 
-Hyperparameters are the variables that determines how a network updates its weight. Changing the value of the hyperparameters could result in a vastly different level of performance for the network. Hyperparameter tuning is the process of finding the optimal values of hyperparameters. Table \ref{tab:hyperparam} shows the list and definition of the hyperparameters avaiable to the model.
+Hyperparameters are the variables that determines how a network updates its weight. Changing the value of the hyperparameters could result in a vastly different level of performance for the network. Hyperparameter tuning is the process of finding the optimal values of hyperparameters. Table \ref{tab:hyperparam} shows the list and definition of the hyperparameters available to the model.
 \begin{table}[!h]
 \begin{tabular}{|l|l|}
 \hline
@@ -225,4 +225,4 @@ Hyperparameters are the variables that determines how a network updates its weig
 
 \subsection{Pruning Vision Transformer}
 
-Pruning was discussed in Chapter 2.7 and it is a method to reduce the number of parameter while maintaining the same level of performance. Pruning will reduce training the training and inference time and compress the size of the model. We did not use any prunning technique in FYP 1 but this is a technique that we wish to investigate in depth in FYP 2.
+Pruning was discussed in Chapter 2.7 and it is a method to reduce the number of parameter while maintaining the same level of performance. Pruning will reduce training the training and inference time and compress the size of the model. We did not use any pruning technique in FYP 1 but this is a technique that we wish to investigate in depth in FYP 2.
