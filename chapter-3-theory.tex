@@ -61,7 +61,7 @@ Attention mechanism was first introduced by \cite{attention} and it is the most 
 \begin{equation}
     \mathbf{y}_i = \sum w_{ij}\mathbf{x}_j
 \end{equation}
-Where $w_{ij}$ is the dot product of $x_i$ and $x_j$. The dot product gives us a real numbered value so we apply a soft,ax function to map the values to [0,1] and to ensure that they sum to 1 over the entire sequence:
+Where $w_{ij}$ is the dot product of $x_i$ and $x_j$. The dot product gives us a real numbered value so we apply a softmax function to map the values to [0,1] and to ensure that they sum to 1 over the entire sequence:
 \begin{equation}
     w_{ij} = \frac{exp w_{ij}}{\sum_j exp w_{ij}}
 \end{equation}
@@ -74,25 +74,25 @@ Every input vector $\mathbf{x}_i$ is used in three different ways in the self at
 
 \end{enumerate}
 
-These roles are called the \textbf{query}, \textbf{key} and \textbf{value}. Three new weight matices are developed for each role namely they are $\mathbf{W_q}, \mathbf{W_k}, \mathbf{W_v}$ and these are the weights that are going to be learned by backpropagation which is going to be discussed in the next section. Since the average value of the dot product grows with the embedding dimension $d_k$, it helps to scale the dot product back a little to stop the inputs to the softmax function from growing too large.
+These roles are called the \textbf{query}, \textbf{key} and \textbf{value}. Three new weight matrices are developed for each role namely: $\mathbf{W_q}, \mathbf{W_k}, \mathbf{W_v}$. These are the weights that are going to be learned by backpropagation which is going to be discussed in the next section. Since the average value of the dot product grows with the embedding dimension $d_k$, it helps to scale the dot product back a little to stop the inputs to the softmax function from growing too large.
   The attention mechanism can be formally described as:
 \begin{equation}
-\mathbf{q}_i = \mathbf{W}_q \mathbf{x}_i
+\mathbf{Q} = \mathbf{W}_q \mathbf{x}_i
 \end{equation}
 \begin{equation}
-    \mathbf{k}_i = \mathbf{W}_k \mathbf{x}_i
+    \mathbf{K} = \mathbf{W}_k \mathbf{x}_i
 \end{equation}
 \begin{equation}
-    \mathbf{v}_i = \mathbf{W}_v \mathbf{x}_i 
+    \mathbf{V} = \mathbf{W}_v \mathbf{x}_i 
 \end{equation}
 \begin{equation}
-    ATTENTION(\mathbf{q,k,v}) = softmax(\frac{\mathbf{q}_i \mathbf{k}_j^T}{\sqrt{d_k}})\mathbf{v}_i
+    ATTENTION(\mathbf{Q,K,V}) = softmax(\frac{\mathbf{Q} \mathbf{K}^T}{\sqrt{d_k}})\mathbf{V}
 \end{equation}
 \begin{equation}
-    \mathbf{y}_i = \sum ATTENTION(\mathbf{q,k,v})\mathbf{x}_j    
+    \mathbf{y} = \sum ATTENTION(\mathbf{Q,K,V})\mathbf{x}    
 \end{equation}
 
-The attention mechanism is shown in figure \ref{fig:attention-unit}
+Where $\mathbf{Q}$ is the query,  $\mathbf{K}$ is the key, $\mathbf{V}$ is the value, $\mathbf{d}_k$ is the number of heads and  $\mathbf{y}$ is the output vector. The attention mechanism is shown in figure \ref{fig:attention-unit}
 
 \begin{figure}[ht]
 \includegraphics[width=4.0cm, height=6.5cm]{images/attention unit.png}
@@ -115,7 +115,7 @@ With the introduction of the softmax function in the previous section, we limit 
 \end{figure}
 \FloatBarrier
 
-Multi-attention head can be thought of as multiple copies of the self-attention mechanism running in parallel, each with their own key, value and query values. However, generating $\mathbf{K}$, $\mathbf{Q}$ and $\mathbf{V}$ for each head would be computationally expensive. We can avoid this problem by rescaling the weight matrix by dividing it with the square root of the number of heads and concatenating the $\mathbf{K}$, $\mathbf{Q}$ and $\mathbf{V}$ matrix as shown in \ref{attention-is-all-you-need}. The entire Transformer architecture with multi-head attention head is shown in figure \ref{fig:transformer-architecture}
+Multi-attention head can be thought of as multiple copies of the self-attention mechanism running in parallel, each with their own key, value and query values. However, generating $\mathbf{K}$, $\mathbf{Q}$ and $\mathbf{V}$ for each head would be computationally expensive. We can avoid this problem by rescaling the weight matrix by dividing it with the square root of the number of heads and concatenating the $\mathbf{K}$, $\mathbf{Q}$ and $\mathbf{V}$ matrix as shown in \citeA{attention-is-all-you-need}. The entire Transformer architecture with multi-head attention head is shown in figure \ref{fig:transformer-architecture}
 
 \begin{figure}[ht]
 \includegraphics[width=6.5cm, height=9.5cm]{images/transformer_architecture.png}
@@ -210,6 +210,9 @@ The derivation of the backpropagation algorithm begins by applying the chain rul
     
     Training a Vision Transformer model requires a lot of computation resource. Several papers took multiple days to train their model even though they are using multiple GPUs in parallel. 
 
+\item \textbf{Large Model Size}
+
+    The trained model would be quite large because we used a Transformer instead of CNN. A large model would take a long time to train and evaluate. Furthermore, it would also be harder to deploy it in the real world due to its size.
 
 \end{enumerate}
 
