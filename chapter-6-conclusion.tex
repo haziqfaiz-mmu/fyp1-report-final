@@ -1,6 +1,22 @@
 %!TEX ROOT = thesis.tex
 \chapter{CONCLUSION}
 
-this is the conclusion
+This chapter contain the problems we encountered, our plans for FYP 2 and the conclusion of our project.
 
-    Latest commit.
+\section{Problems Encountered}
+\begin{enumerate}
+    \item The model that we found used timm, a framework that provides pre-trained encoders and decoders for semantic segmentation models. We found that the documentation is not up to date and it was very difficult to set up our model.
+
+    \item The classes in LoveDa dataset is imbalanced which is an extremely common scenario in semantic segmentation task. None of the works we reviewed did any kind of resampling to balance it out.
+\end{enumerate}
+\section{Plans For FYP 2}
+\begin{enumerate}
+    \item Based on our literature review, the most common evaluation metrics when training a neural network are the amount of memory used (MB), the number of frames processed by the models in one second (FPS), the complexity of the model (G) and the number of parameters. We believe that these parameters would be very useful in evaluating our model. We tried to get these parameters using PyTorch but were unsuccessful. These parameters will be included in our FYP 2.
+
+    \item We listed out five models in our literature review but we have only managed to train one model of them for FYP 1 as most of our effort went to learning and literature review. We wish to train the other models in FYP 2.
+
+    \item Our most important plan for FYP 2 is to prune UNetFormer to reduce its size and training time. We are going to conduct more research on how to prune a semantic segmentation model. 
+\end{enumerate}
+\section{Conclusion}
+
+In FYP1, we studied the fundamentals of semantic segmentation, satellite images and cutting edge deep learning methods in depth and formulated useful and interesting objectives. Literature reviews were conducted to identify the works done in this field. On top of that, we spent months to present an in depth theoretical background necessary for this project. Furthermore, we crafted a research methodology with multiple stages to make sure that our efforts are not sidetracked and meet the project deadline. Other than that, we successfully trained two semantic segmentation of satellite images model . The initial results are quite promising but our training method require a more detailed analysis in FYP 2.

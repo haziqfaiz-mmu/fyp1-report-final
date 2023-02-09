@@ -33,8 +33,60 @@ LoveDA dataset was introduced in Chapter 2 but here we are going to give a more 
 \caption{Classes Description for LoveDA Dataset.}
 \label{tab:class-loveda}
 \end{table}
+\FloatBarrier
 
-Each pixel in the dataset is labelled as it is made specifically for semantic segmentation task. The images in LoveDA dataset are separated into two groups; the rural images and the urban images. Each of the group is already split into a training set, a validation set and a testing set. To be specific, the training set is composed of 2522 images , the validation set is composed of 1669 images  and the 1796 images is used for testing.  The structure of the dataset is shown in figure \ref{fig:loveda-structure} .
+Each pixel in the dataset is labelled as it is made specifically for semantic segmentation task. The images in LoveDA dataset are separated into two groups; the rural images and the urban images. The sample images and maasks are shown in Figure \ref{fig:6} and \ref{fig:1564}. The corresponding colour to each class in the mask is shown in Table \ref{tab:mask-loveda}. 
+\FloatBarrier
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/6.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/mask-rural-6.png}
+    \end{minipage}
+\caption{An Image and Mask From The Rural Set \protect\cite{loveda}}
+\label{fig:6}
+\end{figure}
+\FloatBarrier
+
+\FloatBarrier
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/1564.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/mask-urban-1564.png}
+    \end{minipage}
+\caption{An Image and Mask From The Urban Set \protect\cite{loveda}}
+\label{fig:1564}
+\end{figure}
+\FloatBarrier
+
+\begin{table}[]
+\centering
+\begin{tabular}{|l|l}
+\hline
+\multicolumn{1}{|l|}{\textbf{Class}} & \multicolumn{1}{l|}{\textbf{Colour}} \\ \hline
+       Agriculture & \cellcolor[HTML]{FDE724}             \\\cline{1-1}
+       Forest & \cellcolor[HTML]{90D643}             \\\cline{1-1}
+       Road & \cellcolor[HTML]{30678D}             \\\cline{1-1}
+        Water & \cellcolor[HTML]{20908C}             \\\cline{1-1}
+        Building & \cellcolor[HTML]{443982}             \\\cline{1-1}
+       Background & \cellcolor[HTML]{440154}             \\\cline{1-1}
+       Barren & \cellcolor[HTML]{35B778}            \\ \cline{1-1}
+\end{tabular}
+\caption{Classes Colour for LoveDA Mask.}
+\label{tab:mask-loveda}
+\end{table}
+\FloatBarrier
+
+Each of the group is already split into a training set, a validation set and a testing set. To be specific, the training set is composed of 2522 images , the validation set is composed of 1669 images  and the 1796 images is used for testing.  The structure of the dataset is shown in figure \ref{fig:loveda-structure} .
 
 \FloatBarrier
 \begin{figure}[!h]

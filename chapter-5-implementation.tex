@@ -93,15 +93,21 @@ track our progress in FYP 1 and FYP 2.  Table 5.1 and Table 5.2, respectively, c
 
 \section{Initial Results}
 
-\begin{table}[]
-\begin{tabular}{|l|l|l|l|l|l|}
+The summary of the result of our experiments is shown in Figure \ref{tab:result}. For our U-Net model that was used to provide the baseline performance achieved an mIoU of 33.6\%. It took 4.5 hours to train the U-Net model and it has 2.4 million parameters. 
+
+Our UNetFormer model gave an mIoU of 72.5\% which is a very significant increase compared to U-Net. However it took 14.2 hours to train the UNetFormer model and the model has 11.2 million parameters. The model size and training time is a huge concern and it would be our main objective in FYP 2 to reduce its size and training time. 
+\FloatBarrier
+\begin{table}[!h]
+\centering
+\begin{tabular}{|c|c|c|c|}
 \hline
-\multicolumn{1}{|c|}{\textbf{Model}} & \multicolumn{1}{c|}{\textbf{mIou}} & \textbf{\# of Parameters} & \textbf{Model Size} & \textbf{Training Time} & \textbf{Testing Time} \\ \hline
-\textit{\textbf{U-Net}}              &                                    &                                    &                     &                        &                       \\ \hline
-\textit{\textbf{UnetFormer}}         &                                    &                                    &                     &                        &                       \\ \hline
+\textbf{Model}      & \textbf{MIoU} & \textbf{Parameters} & \textbf{Training Time} \\ \hline
+\textbf{U-Net}      & 33.6          & 2.4 M               & 4.5 hours              \\ \hline
+\textbf{UNetFormer} & 72.5          & 11.2 m              & 14.2 hours             \\ \hline
 \end{tabular}
 \caption{Baseline and Initial Result}
 \label{tab:result}
-
 \end{table}
+\FloatBarrier
+
 
