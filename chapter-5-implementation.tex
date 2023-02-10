@@ -110,4 +110,27 @@ Our UNetFormer model gave an mIoU of 72.5\% which is a very significant increase
 \end{table}
 \FloatBarrier
 
+Figure \ref{fig:train} is a sample image from the testing dataset and \ref{fig:result} displays the segmentation result from U-Net and UNetFormer. We observed that U-Net struggles to classify that are within the boundary of pixels from another class. It also struggles to classify large objects that span across the image. On top of that, the edges between the classes are not very sharp. Compared its result to UNetFormer, the edges produced are very sharp and it has little problems of classifying small objects that are surrounded by other large objects.
+\FloatBarrier
+\begin{figure}[!h]
+\includegraphics[width=9.5cm, height=6.5cm]{images/3592.png}
+\centering
+\caption{An Image From The Test Set}
+\label{fig:train}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/3592-unet.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/3592-unetformer.png}
+    \end{minipage}
+\caption{(a) Segmentation Result From U-Net (b) Segmentation Result from UNetFormer}
+\label{fig:result}
+\end{figure}
+\FloatBarrier
 
