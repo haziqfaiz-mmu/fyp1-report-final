@@ -76,10 +76,24 @@ Lastly, temporal resolution refers to the time period between capturing two cons
 \section{Problem Statement}
 
 \begin{enumerate}
-    \item Most of the models reviewed are either not trained using satellite images or the dataset have very low resolution and dimensions. 
-    \item Most of the semantic segmentation models reviewed are proposed before 2022 and they use CNN as Vision Transformer is a new development.  
-    \item Vision Transformer models are too large hence making it unsuitable for real-world applications.
-    \end{enumerate}
+    \item \textbf{Weak Supervision}
+        
+        \cite{weakly-supervised-semantic} identified that a lot of semantic segmentation models doesn't work well under weak supervision. In this project weak supervision is defined as using dataset that fulfil at least one of this criteria:
+\begin{enumerate}
+    \item \textit{Incomplete Supervision} - The dataset is small and insufficient to train a good model.
+    \item \textit{Inexact supervision} - The labelling is not as exact as necessary which usually occurs in land cover labels with low resolution.
+    \item \textit{Inaccurate supervision} - The labels are wrong.
+\end{enumerate}
+    We observed that there all the datasets reviewed have at least one of this criteria.
+\item \textbf{Inadequate Computing Resource}
+    
+    Training a Vision Transformer model requires a lot of computation resource. Several papers took multiple days to train their model even though they are using multiple GPUs in parallel. 
+
+\item \textbf{Large Model Size}
+
+    The trained model would be quite large because we used a Transformer instead of CNN. A large model would take a long time to train and evaluate. Furthermore, it would also be harder to deploy it in the real world due to its size.
+
+\end{enumerate}
 
 
 \section{Project Objectives}
@@ -90,7 +104,7 @@ Lastly, temporal resolution refers to the time period between capturing two cons
 \end{enumerate}
 \section{Project Scope}
 
-The dataset used in this project will be limited to satellite images. The chosen dataset must have a spatial resolution that is fine enough to avoid any losses of information. On top of that, the dataset must be bigger than 240x240 pixels. The dataset must have been taken by a satellite. There is no restriction on the type of bands that the dataset can have.
+The dataset used in this project will be limited to satellite images. The chosen dataset must have a spatial resolution that is fine enough to avoid any losses of information. To be clear, spectral and temporal resolutions would not be a criteria in choosing the dataset. This is because images with spectral resolutions are overwhelmingly huge (more than 100 MB per image) and it would take a very long time to train a model using such dataset. Furthermore, datasets with temporal resolutions that labelled for semantic segmentation are almost non-existence. On top of that, the dataset must be bigger than 240x240 pixels. The dataset must have been taken by a satellite. There is no restriction on the type of bands that the dataset can have.
 
 The scope of the network proposed in this project must be one based on Vision Transformer.  The Vision Transformer network must be able to perform semantic segmentation task of satellite images. The performance of the proposed Vision Transformer network shall be compared to the  previous works trained on the same dataset.
 

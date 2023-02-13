@@ -93,31 +93,89 @@ track our progress in FYP 1 and FYP 2.  Table 5.1 and Table 5.2, respectively, c
 
 \section{Initial Results}
 
-The summary of the result of our experiments is shown in Figure \ref{tab:result}. For our U-Net model that was used to provide the baseline performance achieved an mIoU of 33.6\%. It took 4.5 hours to train the U-Net model and it has 2.4 million parameters. 
+The summary of the result of our experiments is shown in Figure \ref{tab:result}. For our U-Net model that was used to provide the baseline performance achieved an mIoU of 33.6\%. It took 14.5 hours to train the U-Net model and it has 2.4 million parameters. 
 
-Our UNetFormer model gave an mIoU of 72.5\% which is a very significant increase compared to U-Net. However it took 14.2 hours to train the UNetFormer model and the model has 11.2 million parameters. The model size and training time is a huge concern and it would be our main objective in FYP 2 to reduce its size and training time. 
+Our UNetFormer model gave an mIoU of 72.5\% which is a very significant increase compared to U-Net. However it took 19.2 hours to train the model with 11.2 million parameters. The model size and training time is a huge concern and it would be our main objective in FYP 2 to reduce its size and training time. 
 \FloatBarrier
 \begin{table}[!h]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Model}      & \textbf{mIoU} & \textbf{Parameters} & \textbf{Training Time} \\ \hline
-\textbf{U-Net}      & 33.6          & 2.4 M               & 4.5 hours              \\ \hline
-\textbf{UNetFormer} & 72.5          & 11.2 M              & 14.2 hours             \\ \hline
+\textbf{U-Net}      & 33.6          & 2.4 M               & 14.5 hours              \\ \hline
+\textbf{UNetFormer} & 72.5          & 11.2 M              & 19.2 hours             \\ \hline
 \end{tabular}
 \caption{Baseline and Initial Result}
 \label{tab:result}
 \end{table}
 \FloatBarrier
 
-Figure \ref{fig:train} is a sample image from the testing dataset and \ref{fig:result} displays the segmentation result from U-Net and UNetFormer. We observed that U-Net struggles to classify that are within the boundary of pixels from another class. It also struggles to classify large objects that span across the image. On top of that, the edges between the classes are not very sharp. Compared its result to UNetFormer, the edges produced are very sharp and it has little problems of classifying small objects that are surrounded by other large objects.
+Figure \ref{fig:train} is a sample image from the training and validation dataset and \ref{fig:result} displays the segmentation result from U-Net and UNetFormer. We observed that U-Net struggles to classify that are within the boundary of pixels from another class. It also struggles to classify large objects that span across the image. On top of that, the edges between the classes are not very sharp. Compared its result to UNetFormer, the edges produced are very sharp and it has little problems of classifying small objects that are surrounded by other large objects.
 \FloatBarrier
-\begin{figure}[!h]
-\includegraphics[width=9.5cm, height=6.5cm]{images/3592.png}
+
+\begin{table}[]
 \centering
-\caption{An Image From The Test Set}
-\label{fig:train}
+\begin{tabular}{|l|l}
+\hline
+\multicolumn{1}{|l|}{\textbf{Class}} & \multicolumn{1}{l|}{\textbf{Colour}} \\ \hline
+       Agriculture & \cellcolor[HTML]{ffff00}             \\\cline{1-1}
+       Forest & \cellcolor[HTML]{76ee00}             \\\cline{1-1}
+       Road & \cellcolor[HTML]{c1cdcd}             \\\cline{1-1}
+        Water & \cellcolor[HTML]{0000ff}             \\\cline{1-1}
+        Building & \cellcolor[HTML]{ff4040}             \\\cline{1-1}
+       Background & \cellcolor[HTML]{000000}             \\\cline{1-1}
+       Barren & \cellcolor[HTML]{8a360f}            \\ \cline{1-1}
+\end{tabular}
+\caption{Classes Colour for LoveDA Mask.}
+\label{tab:mask-loveda2}
+\end{table}
+\FloatBarrier
+
+\FloatBarrier
+
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/6.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/6-mask.png}
+    \end{minipage}
+\caption{Image 6 and Its Mask}
+\label{fig:6a}
 \end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/6-unet.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/6-unetformer.png}
+    \end{minipage}
+\caption{Semantic Segmentation Result From U-Net and UNetFormer}
+\label{fig:6b}
+\end{figure}
+
+
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/3592.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/3592-mask.png}
+    \end{minipage}
+\caption{Image 3592 and Its Mask}
+\label{fig:3592a}
+\end{figure}
+
 \begin{figure}[!htb]
     \centering
     \begin{minipage}{0.5\textwidth}
@@ -128,8 +186,68 @@ Figure \ref{fig:train} is a sample image from the testing dataset and \ref{fig:r
         \centering
         \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/3592-unetformer.png}
     \end{minipage}
-\caption{(a) Segmentation Result From U-Net (b) Segmentation Result from UNetFormer}
-\label{fig:result}
+\caption{Semantic Segmentation Result From U-Net and UNetFormer}
+\label{fig:3592b}
 \end{figure}
+
+
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/3770.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/3770-mask.png}
+    \end{minipage}
+\caption{Image 3770 and Its Mask}
+\label{fig:3770a}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/3770-unet.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/3770-unetformer.png}
+    \end{minipage}
+\caption{Semantic Segmentation Result From U-Net and UNetFormer}
+\label{fig:3770b}
+\end{figure}
+
+
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/4112.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/4112-mask.png}
+    \end{minipage}
+\caption{Image 4112 and Its Mask}
+\label{fig:4112a}
+\end{figure}
+
+
+\begin{figure}[!htb]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/4112-unet.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, height=0.35\textheight]{images/4112-mask.png}
+    \end{minipage}
+\caption{Semantic Segmentation Result From U-Net and UNetFormer}
+\label{fig:4112b}
+\end{figure}
+
 \FloatBarrier
 
